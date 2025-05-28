@@ -1,4 +1,4 @@
-// Main JavaScript Controller for Tooch Music Page
+// Main JavaScript Controller for Tooch Magooch Music Page
 class ToochMusicApp {
     constructor() {
         this.isInitialized = false;
@@ -22,7 +22,7 @@ class ToochMusicApp {
     initialize() {
         if (this.isInitialized) return;
 
-        console.log('Initializing Tooch Music App...');
+        console.log('Initializing Tooch Magooch Music App...');
         
         // Initialize core components
         this.setupNavigation();
@@ -38,7 +38,7 @@ class ToochMusicApp {
         this.initializeExternalComponents();
         
         this.isInitialized = true;
-        console.log('Tooch Music App initialized successfully');
+        console.log('Tooch Magooch Music App initialized successfully');
     }
 
     setupNavigation() {

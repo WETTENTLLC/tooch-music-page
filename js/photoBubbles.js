@@ -1,4 +1,4 @@
-// Photo Bubbles Animation for Tooch Music Page
+// Photo Bubbles Animation for Tooch Magooch Music Page
 class PhotoBubbles {
     constructor() {
         this.bubbles = [];

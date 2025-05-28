@@ -1,6 +1,6 @@
 # Tooch Music Page
 
-A music artist website for TOOCHMAGOOCH (AKA MRS. MUNYsUNN) featuring a unique visual design with floating photo bubbles, a lollipop-shaped music player, and more.
+A music artist website for Tooch Magooch (AKA MRS. MUNYsUNN) featuring a unique visual design with floating photo bubbles, a lollipop-shaped music player, and more.
 
 ## Features
 

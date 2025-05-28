@@ -1,29 +1,26 @@
-// Music Configuration and Data for Tooch Music Page
+// Music Configuration and Data for Tooch Magooch Music Page
 const musicConfig = {
     // Featured tracks data
-    tracks: [
-        {
+    tracks: [        {
             id: 1,
             title: "Sweet Melody",
-            artist: "TOOCHMAGOOCH",
+            artist: "Tooch Magooch",
             album: "Sweet Melody",
             duration: "3:24",
             file: "audio/sweet-melody.mp3", // Add actual audio files to audio folder
             cover: "dropbox/Music Player Image.png"
-        },
-        {
+        },        {
             id: 2,
             title: "Sugar Rush",
-            artist: "TOOCHMAGOOCH",
-            album: "Sweet Melody", 
+            artist: "Tooch Magooch",
+            album: "Sweet Melody",
             duration: "4:12",
             file: "audio/sugar-rush.mp3",
             cover: "dropbox/Music Player Image.png"
-        },
-        {
+        },        {
             id: 3,
             title: "Cotton Candy Sky",
-            artist: "TOOCHMAGOOCH",
+            artist: "Tooch Magooch",
             album: "Sweet Melody",
             duration: "3:48", 
             file: "audio/cotton-candy-sky.mp3",

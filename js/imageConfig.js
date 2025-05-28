@@ -1,4 +1,4 @@
-// Image Configuration for Tooch Music Page
+// Image Configuration for Tooch Magooch Music Page
 const imageConfig = {
     // Hero section images
     hero: {

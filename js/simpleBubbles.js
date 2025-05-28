@@ -1,4 +1,4 @@
-// Simple Bubbles Animation for Tooch Music Page
+// Simple Bubbles Animation for Tooch Magooch Music Page
 class SimpleBubbles {
     constructor() {
         this.bubbles = [];

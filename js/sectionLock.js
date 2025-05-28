@@ -37,11 +37,12 @@ class SectionLock {
             }
         }, { passive: true });
         
-        // Ensure proper initial positioning
-        this.updateCurrentSection();
+        // Add keyboard navigation
+        window.addEventListener('keydown', this.handleKeydown.bind(this));
         
-        // Handle navigation clicks
-        this.setupNavigationLinks();
+        // Initial section setup
+        this.updateCurrentSection();
+        this.ensureSectionVisibility();
     }
     
     handleScroll() {
@@ -140,6 +141,24 @@ class SectionLock {
             });
         });
     }
+    
+    ensureSectionVisibility() {
+        // Ensure all sections are properly visible
+        this.sections.forEach((section, index) => {
+            // Force reflow to ensure CSS is applied
+            section.offsetHeight;
+            
+            // Add visible class for CSS transitions
+            section.classList.add('section-visible');
+            
+            // Ensure content containers are visible
+            const contentDiv = section.querySelector('div');
+            if (contentDiv) {
+                contentDiv.style.opacity = '1';
+                contentDiv.style.visibility = 'visible';
+            }
+        });
+    }
 }
 
 // Initialize when DOM is loaded
@@ -148,6 +167,50 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         new SectionLock();
     }, 100);
+});
+
+// Initialize section locking when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Force section visibility
+    const sections = document.querySelectorAll('.snap-section');
+    sections.forEach(section => {
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+    });
+    
+    // Initialize section lock
+    new SectionLock();
+    
+    // Force hero image loading
+    const heroImage = document.getElementById('hero-image');
+    if (heroImage) {
+        heroImage.addEventListener('load', function() {
+            console.log('Hero image loaded successfully');
+            this.style.opacity = '1';
+        });
+        
+        heroImage.addEventListener('error', function() {
+            console.log('Hero image failed to load, using fallback');
+            this.style.opacity = '0';
+            this.parentElement.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        });
+        
+        // Force reload if src is already set
+        if (heroImage.src) {
+            heroImage.src = heroImage.src;
+        }
+    }
+    
+    // Force About section content visibility
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+        const aboutContent = aboutSection.querySelector('.relative.z-10');
+        if (aboutContent) {
+            aboutContent.style.opacity = '1';
+            aboutContent.style.visibility = 'visible';
+            aboutContent.style.zIndex = '30';
+        }
+    }
 });
 
 // Keyboard navigation

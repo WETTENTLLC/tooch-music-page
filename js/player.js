@@ -1,4 +1,4 @@
-// Music Player Controller for Tooch Music Page
+// Music Player Controller for Tooch Magooch Music Page
 class MusicPlayer {
     constructor() {
         this.isInitialized = false;
