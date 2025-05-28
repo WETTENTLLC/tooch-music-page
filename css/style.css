@@ -586,36 +586,51 @@ section {
 html {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    overflow-y: scroll;
 }
 
 body {
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-/* Lock each section in place */
+/* Snap Section Class - Lock each section in place */
+.snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Content container within each section */
+.snap-section > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Legacy section support - convert all sections to snap sections */
 section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
     min-height: 100vh;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-/* Hero section maintains its current styling */
-section.relative.h-screen {
-    scroll-snap-align: start;
-    min-height: 100vh;
+/* Ensure hero section fills screen properly */
+.snap-section.relative {
     height: 100vh;
-}
-
-/* Ensure content stays centered in each section */
-section > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 /* Override for sections that need different alignment */
@@ -626,97 +641,88 @@ section > div {
     align-items: center;
 }
 
-/* Navigation stays fixed */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Adjust body padding to account for fixed nav */
-body {
-    padding-top: 0;
-}
-
-/* Enhanced section transitions */
-section {
-    transition: all 0.3s ease-in-out;
-}
-
-/* Ensure sections maintain proper spacing */
-.py-24 {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-}
-
-/* Snap Section Class */
-.snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-}
-
-/* Specific section adjustments */
+/* Music section specific adjustments */
 #music {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
 }
 
-/* Override default section behavior for snap sections */
-.snap-section {
-    padding-top: 0;
-    padding-bottom: 0;
+/* Videos section styling */
+#videos {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(50, 50, 50, 0.9) 100%);
 }
 
-.snap-section > div {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+/* Merch section styling */
+#merch {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(60, 60, 60, 0.9) 100%);
 }
 
-/* Ensure navigation links work properly with snap scroll */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Fix for iOS Safari snap scrolling */
-@supports (-webkit-touch-callout: none) {
-    html {
-        scroll-snap-type: y mandatory;
-    }
-}
-
-/* Make sure all sections are properly locked */
-section:not(.relative.h-screen) {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Special handling for sections with background styling */
-#videos, 
+/* Tour section styling */
 #tour {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
 }
 
-.about-section,
-.contact-section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Enhanced text contrast for dark sections */
+#videos h2,
+#videos h3,
+#videos p,
+#merch h2,
+#merch h3,
+#merch p,
+#tour h2,
+#tour h3,
+#tour p {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced buttons for dark sections */
+#videos button,
+#merch button,
+#tour button {
+    background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    text-shadow: none;
+    transition: all 0.3s ease;
+}
+
+#videos button:hover,
+#merch button:hover,
+#tour button:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+}
+
+/* Enhanced backdrop styling for dark sections */
+#videos .backdrop-blur-md,
+#merch .backdrop-blur-md,
+#tour .backdrop-blur-md {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* Video thumbnail enhancements */
+#videos .video-thumbnails {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(147, 51, 234, 0.5) transparent;
+}
+
+#videos .video-thumbnails::-webkit-scrollbar {
+    width: 6px;
+}
+
+#videos .video-thumbnails::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+#videos .video-thumbnails::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.5);
+    border-radius: 3px;
+}
+
+#videos .video-thumbnails::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.7);
 }
