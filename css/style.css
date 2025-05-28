@@ -640,6 +640,24 @@ section {
     z-index: 40;
 }
 
+/* Mobile Hero Section Positioning */
+@media (max-width: 768px) {
+    .snap-section.relative .relative.z-20 {
+        justify-content: flex-end;
+        padding-bottom: 8rem;
+    }
+    
+    .snap-section.relative h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .snap-section.relative p {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+    }
+}
+
 /* Merch and Tour Section Styling */
 #merch {
     background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(60, 60, 60, 0.95) 100%);
