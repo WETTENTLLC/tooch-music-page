@@ -581,3 +581,142 @@ section {
         background: rgba(255, 255, 255, 0.2) !important;
     }
 }
+
+/* Scroll Snap and Section Locking */
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Lock each section in place */
+section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Hero section maintains its current styling */
+section.relative.h-screen {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+/* Ensure content stays centered in each section */
+section > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Override for sections that need different alignment */
+#videos,
+#merch,
+#tour {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navigation stays fixed */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Adjust body padding to account for fixed nav */
+body {
+    padding-top: 0;
+}
+
+/* Enhanced section transitions */
+section {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Ensure sections maintain proper spacing */
+.py-24 {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+/* Snap Section Class */
+.snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* Specific section adjustments */
+#music {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+/* Override default section behavior for snap sections */
+.snap-section {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.snap-section > div {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+/* Ensure navigation links work properly with snap scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fix for iOS Safari snap scrolling */
+@supports (-webkit-touch-callout: none) {
+    html {
+        scroll-snap-type: y mandatory;
+    }
+}
+
+/* Make sure all sections are properly locked */
+section:not(.relative.h-screen) {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Special handling for sections with background styling */
+#videos, 
+#tour {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-section,
+.contact-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

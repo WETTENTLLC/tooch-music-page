@@ -39,28 +39,28 @@
             <span></span>
             <span></span>
         </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="container mx-auto px-4 py-6 flex justify-between items-center relative z-10">
-        <div class="text-2xl font-bold">TOOCH MAGOOCH</div>
-        <div class="hidden md:flex space-x-6">
-            <a href="#music" class="hover:text-purple-200 transition">Music</a>
-            <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
-            <a href="#merch" class="hover:text-purple-200 transition">Merch</a>
-            <a href="#tour" class="hover:text-purple-200 transition">Tour</a>
-            <a href="#about" class="hover:text-purple-200 transition">About</a>
-            <a href="#contact" class="hover:text-purple-200 transition">Contact</a>
+    </div>    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <div class="text-2xl font-bold">TOOCH MAGOOCH</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#music" class="hover:text-purple-200 transition">Music</a>
+                <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
+                <a href="#merch" class="hover:text-purple-200 transition">Merch</a>
+                <a href="#tour" class="hover:text-purple-200 transition">Tour</a>
+                <a href="#about" class="hover:text-purple-200 transition">About</a>
+                <a href="#contact" class="hover:text-purple-200 transition">Contact</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://instagram.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-twitter"></i></a>
+                <a href="https://spotify.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-spotify"></i></a>
+                <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="hover:text-purple-200"><i class="fab fa-youtube"></i></a>
+            </div>
+            <button class="md:hidden">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <div class="flex space-x-4">
-            <a href="https://instagram.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-twitter"></i></a>
-            <a href="https://spotify.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-spotify"></i></a>
-            <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="hover:text-purple-200"><i class="fab fa-youtube"></i></a>
-        </div>
-        <button class="md:hidden">
-            <i class="fas fa-bars"></i>
-        </button>
     </nav>
 
     <!-- Hero Section -->
@@ -78,8 +78,8 @@
             </div>
         </div>
     </section>    <!-- Music Section with Rainbow Lollipop Player -->
-    <section id="music" class="py-24 relative">
-        <div class="container mx-auto px-4">
+    <section id="music" class="snap-section">
+        <div class="container mx-auto px-4 py-24">
             <h2 class="text-4xl font-bold text-center mb-16">Music</h2>
             
             <!-- Centered Music Player and Track List -->
@@ -161,11 +161,9 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Videos Section -->
-    <section id="videos" class="py-24 bg-black/30">
-        <div class="container mx-auto px-4">
+    </section>    <!-- Videos Section -->
+    <section id="videos" class="snap-section bg-black/30">
+        <div class="container mx-auto px-4 py-24">
             <h2 class="text-4xl font-bold text-center mb-16">Videos</h2>
             
             <div class="flex flex-col md:flex-row gap-8">
@@ -197,25 +195,25 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Merchandise Section (Coming Soon) -->
-    <section id="merch" class="py-24 container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-16">Merchandise</h2>
-        <div class="backdrop-blur-md bg-white/10 rounded-15 p-8 text-center">
-            <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
-            <p class="mb-6">Exclusive merchandise will be available soon. Stay tuned!</p>
-            <button class="bg-purple-600/50 hover:bg-purple-600/70 px-8 py-3 rounded-full transition">
-                Get Notified
-            </button>
+    </section>    <!-- Merchandise Section (Coming Soon) -->
+    <section id="merch" class="snap-section">
+        <div class="container mx-auto px-4 py-24">
+            <h2 class="text-4xl font-bold text-center mb-16">Merchandise</h2>
+            <div class="backdrop-blur-md bg-white/10 rounded-15 p-8 text-center max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
+                <p class="mb-6">Exclusive merchandise will be available soon. Stay tuned!</p>
+                <button class="bg-purple-600/50 hover:bg-purple-600/70 px-8 py-3 rounded-full transition">
+                    Get Notified
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Tour Section (Coming Soon) -->
-    <section id="tour" class="py-24 bg-black/30">
-        <div class="container mx-auto px-4">
+    <section id="tour" class="snap-section bg-black/30">
+        <div class="container mx-auto px-4 py-24">
             <h2 class="text-4xl font-bold text-center mb-16">Tour Dates</h2>
-            <div class="backdrop-blur-md bg-white/10 rounded-15 p-8 text-center">
+            <div class="backdrop-blur-md bg-white/10 rounded-15 p-8 text-center max-w-2xl mx-auto">
                 <h3 class="text-2xl font-bold mb-4">Coming Soon</h3>
                 <p class="mb-6">Tour dates will be announced soon. Sign up to get notified!</p>
                 <button class="bg-purple-600/50 hover:bg-purple-600/70 px-8 py-3 rounded-full transition">
@@ -223,7 +221,7 @@
                 </button>
             </div>
         </div>
-    </section>    <!-- About Section with Gradient Fade -->
+    </section><!-- About Section with Gradient Fade -->
     <section id="about" class="about-section relative">
         <!-- Gradient fade from white to black -->
         <div class="gradient-fade-to-black"></div>
