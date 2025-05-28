@@ -768,3 +768,34 @@ section {
         margin: 1rem;
     }
 }
+
+/* About section text container scrolling */
+.about-section .backdrop-blur-md {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.about-section .backdrop-blur-md::-webkit-scrollbar {
+    width: 6px;
+}
+
+.about-section .backdrop-blur-md::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.about-section .backdrop-blur-md::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.about-section .backdrop-blur-md::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Ensure smooth scrolling within text containers */
+.about-section .backdrop-blur-md {
+    scroll-behavior: smooth;
+}

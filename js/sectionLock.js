@@ -54,8 +54,26 @@ class SectionLock {
             this.snapToCurrentSection();
         }, 100);
     }
-    
-    handleWheel(e) {
+      handleWheel(e) {
+        // Check if scrolling within a scrollable container (like backdrop-blur text areas)
+        let target = e.target;
+        while (target && target !== document.body) {
+            // Allow scrolling within backdrop-blur containers or any element with overflow
+            if (target.classList.contains('backdrop-blur-md') || 
+                target.classList.contains('backdrop-blur') ||
+                getComputedStyle(target).overflowY === 'auto' ||
+                getComputedStyle(target).overflowY === 'scroll') {
+                
+                // Check if the container actually has scrollable content
+                const hasScrollableContent = target.scrollHeight > target.clientHeight;
+                if (hasScrollableContent) {
+                    // Allow the scroll event to proceed naturally within the container
+                    return;
+                }
+            }
+            target = target.parentElement;
+        }
+        
         e.preventDefault();
         
         if (this.isScrolling) return;
