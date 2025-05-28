@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Minimal test styling */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #667eea, #764ba2);
+            color: white;
+            font-family: sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-4xl font-bold mb-8">Test Page</h1>
+        
+        <div class="card">
+            <h2 class="text-2xl font-bold mb-4">Test Card 1</h2>
+            <p>This is a test card to verify that basic styling is working correctly.</p>
+            <button class="mt-4 bg-pink-600 hover:bg-pink-700 px-8 py-3 rounded-full">Test Button</button>
+        </div>
+        
+        <div class="card">
+            <h2 class="text-2xl font-bold mb-4">Test Card 2</h2>
+            <p>If you can see this card, basic rendering is working correctly.</p>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Test page loaded');
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => alert('Button clicked'));
+        });
+    </script>
+</body>
+</html>

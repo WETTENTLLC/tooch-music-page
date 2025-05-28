@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Fix display issues with inline styles -->
+    <style>
+        /* Force elements to display properly */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Section visibility */
+        .dashboard-section {
+            display: block;
+        }
+        
+        /* Card styling */
+        .dashboard-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive video container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Smoky Background with Money -->
+    <div class="smoky-container">
+        <div class="smoke">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="money">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="flex h-screen relative z-10">
+        <!-- Sidebar -->
+        <div class="sidebar w-64 p-6 flex flex-col">
+            <div class="text-2xl font-bold mb-10">ARTIST DASHBOARD</div>
+            
+            <nav class="flex-1">
+                <ul class="space-y-3">
+                    <li><a href="#" class="block py-2 px-4 rounded-md bg-white/20 hover:bg-white/30 transition" data-section="overview">Overview</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded-md hover:bg-white/30 transition" data-section="music">Music</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded-md hover:bg-white/30 transition" data-section="videos">Videos</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded-md hover:bg-white/30 transition" data-section="merchandise">Merchandise</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded-md hover:bg-white/30 transition" data-section="content">Content</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded-md hover:bg-white/30 transition" data-section="analytics">Analytics</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mt-auto">
+                <a href="index.html" class="block py-2 px-4 text-center bg-white/10 hover:bg-white/20 rounded-md transition">View Public Site</a>
+                <button id="logout-btn" class="w-full mt-4 py-2 px-4 text-center bg-red-500/30 hover:bg-red-500/50 rounded-md transition">Logout</button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <h2 class="text-3xl font-bold mb-8">Dashboard Overview</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+                    <!-- Stats Cards -->
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-lg opacity-70 mb-2">Page Views</h3>
+                        <div class="text-4xl font-bold">24,981</div>
+                        <div class="text-sm text-green-300 mt-2">+12% from last month</div>
+                    </div>
+                    
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-lg opacity-70 mb-2">Music Plays</h3>
+                        <div class="text-4xl font-bold">18,632</div>
+                        <div class="text-sm text-green-300 mt-2">+8% from last month</div>
+                    </div>
+                    
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-lg opacity-70 mb-2">Video Views</h3>
+                        <div class="text-4xl font-bold">42,753</div>
+                        <div class="text-sm text-green-300 mt-2">+15% from last month</div>
+                    </div>
+                    
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-lg opacity-70 mb-2">Merch Sales</h3>
+                        <div class="text-4xl font-bold">$8,294</div>
+                        <div class="text-sm text-red-300 mt-2">-3% from last month</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Recent Activity -->
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-xl font-bold mb-4">Recent Activity</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-green-400 mr-3"><i class="fas fa-shopping-cart"></i></span>
+                                <div>
+                                    <p class="font-medium">New merchandise order #1293</p>
+                                    <p class="text-sm opacity-70">10 minutes ago</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 mr-3"><i class="fas fa-user-plus"></i></span>
+                                <div>
+                                    <p class="font-medium">24 new newsletter subscribers</p>
+                                    <p class="text-sm opacity-70">1 hour ago</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-400 mr-3"><i class="fas fa-exclamation-triangle"></i></span>
+                                <div>
+                                    <p class="font-medium">Low stock alert: "Tour T-Shirt M"</p>
+                                    <p class="text-sm opacity-70">3 hours ago</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Audience Chart -->
+                    <div class="dashboard-card p-6">
+                        <h3 class="text-xl font-bold mb-4">Audience Growth</h3>
+                        <canvas id="audienceChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Music Management Section -->
+            <section id="music" class="dashboard-section">
+                <h2 class="text-3xl font-bold mb-8">Music Management</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Current Tracks -->
+                    <div class="lg:col-span-2">
+                        <div class="dashboard-card p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold">Current Tracks</h3>
+                                <button id="refresh-tracks-btn" class="px-4 py-2 bg-purple-600/50 hover:bg-purple-600/70 rounded-md transition">
+                                    <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                </button>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b border-white/20">
+                                            <th class="text-left py-3 px-2">Title</th>
+                                            <th class="text-left py-3 px-2">Artist</th>
+                                            <th class="text-left py-3 px-2">Duration</th>
+                                            <th class="text-right py-3 px-2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tracks-table-body">
+                                        <!-- Tracks will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add/Edit Track Form -->
+                    <div class="lg:col-span-1">
+                        <div class="dashboard-card p-6">
+                            <h3 class="text-xl font-bold mb-6" id="track-form-title">Add New Track</h3>
+                            
+                            <form id="track-form" class="space-y-4">
+                                <input type="hidden" id="track-id" value="">
+                                
+                                <div>
+                                    <label for="track-title" class="block mb-1">Title</label>
+                                    <input type="text" id="track-title" class="w-full bg-white/10 border border-white/20 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="track-artist" class="block mb-1">Artist</label>
+                                    <input type="text" id="track-artist" class="w-full bg-white/10 border border-white/20 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="track-duration" class="block mb-1">Duration (mm:ss)</label>
+                                    <input type="text" id="track-duration" class="w-full bg-white/10 border border-white/20 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500" pattern="[0-9]{1,2}:[0-9]{2}" placeholder="3:45" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="track-file" class="block mb-1">Audio File URL</label>
+                                    <input type="url" id="track-file" class="w-full bg-white/10 border border-white/20 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500" required>
+                                    <p class="text-xs mt-1 opacity-70">Enter a direct URL to an MP3 file</p>
+                                </div>
+                                
+                                <div>
+                                    <label for="track-cover" class="block mb-1">Cover Image URL</label>
+                                    <input type="url" id="track-cover" class="w-full bg-white/10 border border-white/20 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500">
+                                    <p class="text-xs mt-1 opacity-70">Enter a direct URL to an image file or use a Dropbox image</p>
+                                </div>
+                                
+                                <div class="flex space-x-3 pt-2">
+                                    <button type="submit" class="flex-1 bg-purple-600/50 hover:bg-purple-600/70 py-2 rounded-md transition">
+                                        Save Track
+                                    </button>
+                                    <button type="button" id="reset-form-btn" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Videos Section -->
+            <section id="videos" class="dashboard-section">
+                <h2 class="text-3xl font-bold mb-8">Video Management</h2>
+                
+                <div class="dashboard-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold">YouTube Videos</h3>
+                        <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="px-4 py-2 bg-red-600/50 hover:bg-red-600/70 rounded-md transition">
+                            <i class="fab fa-youtube mr-2"></i>Open YouTube Channel
+                        </a>
+                    </div>
+                    
+                    <p class="mb-4">
+                        Your YouTube videos are automatically displayed on your website from your channel:
+                        <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" class="text-purple-300 hover:underline" target="_blank">
+                            @toochie916
+                        </a>
+                    </p>
+                    
+                    <div class="bg-black/30 p-4 rounded-md mb-6">
+                        <p class="text-sm">
+                            <i class="fas fa-info-circle mr-2 text-blue-300"></i>
+                            To add or manage videos, upload them directly to your YouTube channel. 
+                            They will automatically appear on your website.
+                        </p>
+                    </div>
+                    
+                    <!-- Simplified Video Embedding -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold mb-3">Featured Video</h4>
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/o1n4es-69t0?si=pXT5MUqWp2H8mDte" 
+                                title="YouTube video player"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <div>
+                                <p class="font-medium">Current Featured Video</p>
+                                <p class="text-sm opacity-70">This video appears in the featured section of your website</p>
+                            </div>
+                            <button class="px-3 py-1 bg-purple-600/50 hover:bg-purple-600/70 rounded-md transition text-sm">
+                                Change Featured
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Videos - Simplified -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold mb-3">Recent Videos</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="dashboard-card p-3">
+                                <div class="video-container">
+                                    <iframe 
+                                        src="https://www.youtube.com/embed/o1n4es-69t0?si=pXT5MUqWp2H8mDte" 
+                                        title="YouTube video player"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <p class="font-medium text-sm truncate mt-2">Tooch Music Video</p>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-xs opacity-70">Posted yesterday</span>
+                                    <span class="text-xs text-green-300">823 views</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-card p-3 flex items-center justify-center h-32 text-center">
+                                <div>
+                                    <i class="fas fa-plus-circle text-2xl opacity-50 mb-2"></i>
+                                    <p class="opacity-70 text-sm">More videos from your channel will appear here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Merchandise Section -->
+            <section id="merchandise" class="dashboard-section">
+                <h2 class="text-3xl font-bold mb-8">Merchandise Management</h2>
+                
+                <div class="dashboard-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Coming Soon</h3>
+                    <p>Merchandise management features will be available in a future update.</p>
+                </div>
+            </section>
+            
+            <!-- Content Section -->
+            <section id="content" class="dashboard-section">
+                <h2 class="text-3xl font-bold mb-8">Content Management</h2>
+                
+                <div class="dashboard-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Coming Soon</h3>
+                    <p>Content management features will be available in a future update.</p>
+                </div>
+            </section>
+            
+            <!-- Analytics Section -->
+            <section id="analytics" class="dashboard-section">
+                <h2 class="text-3xl font-bold mb-8">Analytics</h2>
+                
+                <div class="dashboard-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Coming Soon</h3>
+                    <p>Detailed analytics will be available in a future update.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Load auth.js first and ONLY once -->
+    <script src="js/auth.js"></script>
+    
+    <!-- Then other scripts -->
+    <script src="js/musicConfig.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <!-- Load scripts -->
+    <script>
+    // Simple authentication check
+    if (!localStorage.getItem('adminLoggedIn')) {
+        window.location.href = 'login.html';
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Logout button handler
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'login.html';
+            });
+        }
+        
+        // Tab navigation
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+        const sections = document.querySelectorAll('.dashboard-section');
+        
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+        
+        // Default to showing overview
+        showSection('overview');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('bg-white/20'));
+                this.classList.add('bg-white/20');
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
+            });
+        });
+        
+        // Initialize chart if it exists
+        if (document.getElementById('audienceChart')) {
+            try {
+                const ctx = document.getElementById('audienceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Website Visitors',
+                            data: [12000, 14500, 16000, 15200, 18000, 24981],
+                            borderColor: 'rgba(255, 255, 255, 0.8)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: 'Social Media Followers',
+                            data: [45000, 47200, 52000, 61000, 67000, 72000],
+                            borderColor: 'rgba(147, 51, 234, 0.8)',
+                            backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { color: 'white' }
+                            },
+                            tooltip: { backgroundColor: 'rgba(0, 0, 0, 0.7)' }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            },
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+                            }
+                        }
+                    }
+                });
+            } catch(e) {
+                console.error("Chart error:", e);
+            }
+        }
+    });
+    </script>
+</body>
+</html>

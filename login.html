@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Tooch Music</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Use CORS-friendly Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Smoky Background with Money -->
+    <div class="smoky-container">
+        <div class="smoke">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="money">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card candy-card">
+            <h2 class="login-title">Admin Login</h2>
+            <div id="login-error" class="login-error"></div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="rainbow-btn login-btn">Login</button>
+            </form>
+            <div class="back-link">
+                <a href="index.html">← Back to main site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load auth system first -->
+    <script src="js/auth.js"></script>
+    <!-- Then load login script -->
+    <script src="js/login.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if already logged in
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            window.location.href = 'dashboard.html';
+            return;
+        }
+        
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        
+        // Simple admin credentials
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'toochmusic2023';
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // Set logged in status
+                localStorage.setItem('adminLoggedIn', 'true');
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Show error
+                loginError.style.display = 'block';
+                loginError.textContent = 'Invalid username or password. Please try again.';
+                document.getElementById('password').value = '';
+            }
+        });
+    });
+    </script>
+</body>
+</html>
