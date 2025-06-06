@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooch Magooch - Artist One Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .one-sheet-container {
+            max-width: 8.5in;
+            min-height: 11in;
+            background: white;
+            margin: 2rem auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .artist-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin: 0 auto 1rem;
+        }
+        
+        .content-section {
+            padding: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .bio-text {
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+        
+        .music-section {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #2d3748;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .audio-player {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-section {
+            background: #667eea;
+            color: white;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .website-link {
+            background: white;
+            color: #667eea;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .website-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .one-sheet-container {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="one-sheet-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <img src="dropbox/Body Image.png" alt="Tooch Magooch" class="artist-image">
+            <h1 class="text-3xl font-bold mb-2">TOOCH MAGOOCH</h1>
+            <p class="text-lg opacity-90">Emerging Artist • Multi-Genre • Electronic/Hip-Hop/R&B</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <i class="fab fa-spotify text-2xl"></i>
+                <i class="fab fa-apple text-2xl"></i>
+                <i class="fab fa-youtube text-2xl"></i>
+                <i class="fab fa-instagram text-2xl"></i>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <!-- Bio Section -->
+            <div class="mb-6">
+                <h2 class="section-title">ARTIST BIO</h2>
+                <p class="bio-text">
+                    <strong>Tooch Magooch</strong> is an emerging artist known for blending various musical styles into a unique sound that captivates audiences worldwide. With influences ranging from hip-hop to electronic and R&B, Tooch Magooch creates music that defies traditional genre boundaries.
+                </p>
+                <p class="bio-text">
+                    Born and raised in a vibrant musical community, Tooch discovered their passion for music at an early age. Starting with piano lessons and progressing to digital production, they have developed a signature sound that combines organic instruments with cutting-edge electronic elements.
+                </p>
+                <p class="bio-text">
+                    Their debut singles have garnered attention from music blogs and streaming platforms alike, with tracks reaching thousands of listeners across multiple countries. Each release showcases Tooch's ability to craft melodies that resonate with diverse audiences while maintaining artistic integrity.
+                </p>
+            </div>
+
+            <!-- Music Section -->
+            <div class="music-section">
+                <h2 class="section-title">FEATURED CONTENT</h2>
+                
+                <!-- Music Video -->
+                <div class="mb-4">
+                    <h3 class="font-semibold text-lg mb-2">Latest Music Video</h3>
+                    <div class="video-container">
+                        <div class="text-center">
+                            <i class="fas fa-play-circle text-6xl text-white opacity-70 mb-2"></i>
+                            <p class="text-white">Music Video Placeholder</p>
+                            <p class="text-sm text-gray-300">Click to add your music video</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Song -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Featured Track</h3>
+                    <div class="audio-player">
+                        <i class="fas fa-play-circle text-3xl"></i>
+                        <div class="flex-1">
+                            <p class="font-semibold">Track Title</p>
+                            <p class="text-sm opacity-70">Album Name • 2024</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm">3:45</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Stats/Achievements -->
+            <div class="mb-6">
+                <h2 class="section-title">KEY HIGHLIGHTS</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600">10K+</div>
+                        <div class="text-sm text-gray-600">Monthly Listeners</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600">5+</div>
+                        <div class="text-sm text-gray-600">Released Tracks</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600">3</div>
+                        <div class="text-sm text-gray-600">Music Videos</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600">50K+</div>
+                        <div class="text-sm text-gray-600">Social Media Reach</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact/Website Section -->
+        <div class="contact-section">
+            <h2 class="text-xl font-bold mb-4">CONTACT & LINKS</h2>
+            <div class="contact-grid">
+                <div>
+                    <h3 class="font-semibold mb-2">Management</h3>
+                    <p class="text-sm">management@toochmagooch.com</p>
+                    <p class="text-sm">+1 (555) 123-4567</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Booking</h3>
+                    <p class="text-sm">booking@toochmagooch.com</p>
+                    <p class="text-sm">+1 (555) 123-4568</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Press</h3>
+                    <p class="text-sm">press@toochmagooch.com</p>
+                    <p class="text-sm">High-res photos available</p>
+                </div>
+            </div>
+            
+            <!-- Website Link -->
+            <div class="mt-6">
+                <a href="index.html" class="website-link block">
+                    <i class="fas fa-globe mr-2"></i>
+                    Visit Official Website: www.toochmagooch.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Print Button -->
+    <div class="text-center py-4">
+        <button onclick="window.print()" class="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            <i class="fas fa-print mr-2"></i>
+            Print One Sheet
+        </button>
+        <a href="index.html" class="ml-4 bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Back to Website
+        </a>
+    </div>
+</body>
+</html>
