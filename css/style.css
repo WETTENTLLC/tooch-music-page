@@ -455,6 +455,26 @@ input:focus, textarea:focus {
 section {
     position: relative;
     z-index: 5;
+    transition: all 0.3s ease;
+}
+
+/* Natural Section Spacing for Smooth Scrolling */
+#videos, #media, #merch, #tour, #contact {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+/* Better visual separation between sections */
+#videos {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#media {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#contact {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Enhanced Form Styling for Contact */
@@ -589,17 +609,17 @@ section {
 }
 
 /* Hero Section Enhancement */
-.snap-section.relative {
+.hero-section.relative {
     height: 100vh;
     min-height: 100vh;
 }
 
-.snap-section.relative .absolute.inset-0.bg-black\/50 {
+.hero-section.relative .absolute.inset-0.bg-black\/50 {
     background: rgba(0, 0, 0, 0.4);
     z-index: 10;
 }
 
-.snap-section.relative .relative.z-20 {
+.hero-section.relative .relative.z-20 {
     z-index: 30;
     height: 100vh;
     display: flex;
@@ -622,13 +642,13 @@ section {
 }
 
 /* Hero text enhancement */
-.snap-section.relative h1 {
+.hero-section.relative h1 {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     position: relative;
     z-index: 40;
 }
 
-.snap-section.relative p {
+.hero-section.relative p {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
     position: relative;
     z-index: 40;
@@ -636,17 +656,17 @@ section {
 
 /* Mobile Hero Section Positioning */
 @media (max-width: 768px) {
-    .snap-section.relative .relative.z-20 {
+    .hero-section.relative .relative.z-20 {
         justify-content: flex-end;
         padding-bottom: 8rem;
     }
     
-    .snap-section.relative h1 {
+    .hero-section.relative h1 {
         font-size: 3rem;
         margin-bottom: 1rem;
     }
     
-    .snap-section.relative p {
+    .hero-section.relative p {
         font-size: 1.125rem;
         margin-bottom: 2rem;
     }
@@ -701,8 +721,8 @@ section {
 }
 
 /* Ensure Merch and Tour sections are properly visible */
-#merch.snap-section,
-#tour.snap-section {
+#merch,
+#tour {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -825,4 +845,149 @@ section {
 .about-section strong {
     color: #ff6b9d;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(40, 40, 40, 0.95) 50%,
+        rgba(20, 20, 20, 0.95) 100%
+    );
+    backdrop-filter: blur(20px);
+    border-left: 2px solid rgba(255, 107, 157, 0.3);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    padding-top: 6rem;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 107, 157, 0.2);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.mobile-menu a:hover {
+    color: #ff6b9d;
+    transform: translateX(10px);
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+}
+
+.mobile-menu .close-menu {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+
+.mobile-menu .close-menu:hover {
+    background: linear-gradient(135deg, #c44569, #ff6b9d);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+}
+
+/* Mobile menu button styling */
+nav button.md\:hidden {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.8), rgba(196, 69, 105, 0.8));
+    border: 2px solid rgba(255, 107, 157, 0.6);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+nav button.md\:hidden:hover {
+    background: linear-gradient(135deg, rgba(196, 69, 105, 0.9), rgba(255, 107, 157, 0.9));
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+nav button.md\:hidden i {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Enhanced navbar background for better visibility */
+nav.fixed {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(40, 40, 40, 0.8) 50%,
+        rgba(20, 20, 20, 0.7) 100%
+    );
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure nav text is visible */
+nav a {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff6b9d !important;
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+}
+
+/* Social media icons in nav */
+nav .fab {
+    color: #ffffff;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+nav .fab:hover {
+    color: #ff6b9d;
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
 }

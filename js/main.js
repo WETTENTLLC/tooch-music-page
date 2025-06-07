@@ -176,40 +176,59 @@ class ToochMusicApp {
                 console.log('Newsletter signup:', email);
             }, 1000);
         });
-    }
-
-    setupMobileMenu() {
-        const menuButton = document.querySelector('nav button');
+    }    setupMobileMenu() {
+        const menuButton = document.getElementById('mobile-menu-btn');
         const mobileNav = document.createElement('div');
+        const overlay = document.createElement('div');
+        
         mobileNav.className = 'mobile-menu';
+        overlay.className = 'mobile-menu-overlay';
+        
         mobileNav.innerHTML = `
-            <a href="#music">Music</a>
-            <a href="#videos">Videos</a>
-            <a href="#merch">Merch</a>
-            <a href="#tour">Tour</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <button class="close-menu text-white text-2xl mt-8">&times;</button>
+            <a href="#music">🎵 Music</a>
+            <a href="#videos">🎬 Videos</a>
+            <a href="#media">📸 Media</a>
+            <a href="#merch">🛍️ Merch</a>
+            <a href="#tour">🎤 Tour</a>
+            <a href="#about">ℹ️ About</a>
+            <a href="press-kit.html">📰 Press Kit</a>
+            <a href="#contact">📧 Contact</a>
+            <button class="close-menu">✕ Close</button>
         `;
         
+        document.body.appendChild(overlay);
         document.body.appendChild(mobileNav);
 
         if (menuButton) {
             menuButton.addEventListener('click', () => {
                 mobileNav.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             });
         }
 
-        const closeButton = mobileNav.querySelector('.close-menu');
-        closeButton.addEventListener('click', () => {
+        const closeMenu = () => {
             mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        };
+
+        const closeButton = mobileNav.querySelector('.close-menu');
+        closeButton.addEventListener('click', closeMenu);
+        
+        // Close on overlay click
+        overlay.addEventListener('click', closeMenu);
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMenu();
+            }
         });
 
         // Close on link click
         mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-            });
+            link.addEventListener('click', closeMenu);
         });
     }
 

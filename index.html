@@ -298,34 +298,65 @@
             <span></span>
             <span></span>
         </div>
-    </div>    <!-- Navigation -->    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md border-b border-white/10">
-        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+    </div>    <!-- Navigation -->    
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-purple-900/95 via-black/90 to-pink-900/95 backdrop-blur-sm border-b border-pink-500/20">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="logo-container">
                 <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo" style="max-height: 60px; width: auto;">
                 <span class="floating-sparkle">✨</span>
                 <span class="floating-sparkle">💲</span>
                 <span class="floating-sparkle">⭐</span>
-            </div>            <div class="hidden md:flex space-x-6">
-                <a href="#music" class="hover:text-purple-200 transition">Music</a>
-                <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
-                <a href="#media" class="hover:text-purple-200 transition">Media</a>
-                <a href="#merch" class="hover:text-purple-200 transition">Merch</a>
-                <a href="#tour" class="hover:text-purple-200 transition text-[#ff6b9d]">Tour</a>                <a href="#about" class="hover:text-purple-200 transition">About</a>
-                <a href="press-kit.html" class="hover:text-purple-200 transition">Press Kit</a>
-                <a href="#contact" class="hover:text-purple-200 transition">Contact</a>
             </div>
-            <div class="flex space-x-4">
-                <a href="https://instagram.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-twitter"></i></a>
-                <a href="https://spotify.com" target="_blank" class="hover:text-purple-200"><i class="fab fa-spotify"></i></a>
-                <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="hover:text-purple-200"><i class="fab fa-youtube"></i></a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#music" class="hover:text-purple-200 transition-colors duration-300 text-white">Music</a>
+                <a href="#videos" class="hover:text-purple-200 transition-colors duration-300 text-white">Videos</a>
+                <a href="#media" class="hover:text-purple-200 transition-colors duration-300 text-white">Media</a>
+                <a href="#merch" class="hover:text-purple-200 transition-colors duration-300 text-white">Merch</a>
+                <a href="#tour" class="hover:text-purple-200 transition-colors duration-300 text-[#ff6b9d]">Tour</a>
+                <a href="#about" class="hover:text-purple-200 transition-colors duration-300 text-white">About</a>
+                <a href="press-kit.html" class="hover:text-purple-200 transition-colors duration-300 text-white">Press Kit</a>
+                <a href="#contact" class="hover:text-purple-200 transition-colors duration-300 text-white">Contact</a>
             </div>
-            <button class="md:hidden">
-                <i class="fas fa-bars"></i>
+            
+            <!-- Social Links -->
+            <div class="hidden md:flex space-x-4">
+                <a href="https://instagram.com" target="_blank" class="hover:text-purple-200 text-white transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank" class="hover:text-purple-200 text-white transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+                <a href="https://spotify.com" target="_blank" class="hover:text-purple-200 text-white transition-colors duration-300"><i class="fab fa-spotify"></i></a>
+                <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="hover:text-purple-200 text-white transition-colors duration-300"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-pink-300 transition-colors duration-300 z-50 relative">
+                <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 bg-gradient-to-br from-purple-900/98 via-black/95 to-pink-900/98 backdrop-blur-lg z-40 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-center">
+                <a href="#music" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Music</a>
+                <a href="#videos" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Videos</a>
+                <a href="#media" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Media</a>
+                <a href="#merch" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Merch</a>
+                <a href="#tour" class="mobile-menu-link text-2xl text-[#ff6b9d] hover:text-pink-300 transition-colors duration-300">Tour</a>
+                <a href="#about" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">About</a>
+                <a href="press-kit.html" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Press Kit</a>
+                <a href="#contact" class="mobile-menu-link text-2xl text-white hover:text-pink-300 transition-colors duration-300">Contact</a>
+                
+                <!-- Mobile Social Links -->
+                <div class="flex space-x-6 mt-8">
+                    <a href="https://instagram.com" target="_blank" class="text-white hover:text-pink-300 transition-colors duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="text-white hover:text-pink-300 transition-colors duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
+                    <a href="https://spotify.com" target="_blank" class="text-white hover:text-pink-300 transition-colors duration-300 text-2xl"><i class="fab fa-spotify"></i></a>
+                    <a href="https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G" target="_blank" class="text-white hover:text-pink-300 transition-colors duration-300 text-2xl"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
     </nav>    <!-- Hero Section -->
-    <section class="snap-section relative">
+    <section class="hero-section min-h-screen relative">
         <div class="absolute inset-0 bg-gradient-to-br from-[#667eea] to-[#764ba2] z-10"></div>
         <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">            <div class="logo-container mb-8" style="max-width: 800px;">
                 <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo w-full">
@@ -341,7 +372,7 @@
             </div>
         </div>
     </section><!-- Music Section with Rainbow Lollipop Player -->
-    <section id="music" class="snap-section">
+    <section id="music" class="py-24">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16 text-white">Music Player 🎵</h2>
             
@@ -423,7 +454,7 @@
                 </div>
             </div>
         </div>    </section>    <!-- About Section with Gradient Fade - Moved after Music -->    
-    <section id="about" class="about-section snap-section relative">
+    <section id="about" class="about-section relative">
         <!-- Gradient fade from white to black -->
         <div class="gradient-fade-to-black"></div>
         
@@ -462,7 +493,7 @@
                 </div>
             </div>
         </div>
-    </section><!-- Videos Section -->    <section id="videos" class="snap-section bg-black/30">
+    </section><!-- Videos Section -->    <section id="videos" class="py-24 bg-black/30">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16">Videos & Photos 🎬📸</h2>
             
@@ -507,7 +538,7 @@
     </section>
 
     <!-- Media Section -->
-    <section id="media" class="snap-section">
+    <section id="media" class="py-24">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16 text-white">Media Gallery 📸</h2>
             
@@ -559,7 +590,7 @@
             </div>
         </div>
     </section>    <!-- Merchandise Section -->
-    <section id="merch" class="snap-section">
+    <section id="merch" class="py-24">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16 text-white">Merchandise 👕</h2>
             
@@ -633,7 +664,7 @@
             </div>
         </div>
     </section>    <!-- Tour Section -->
-    <section id="tour" class="snap-section bg-black/30">
+    <section id="tour" class="py-24 bg-black/30">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16 text-white">Tour Dates 🎤</h2>
             
@@ -722,7 +753,7 @@
                 </div>
             </div>
         </div>    </section><!-- Contact Section -->
-    <section id="contact" class="contact-section snap-section bg-black relative">
+    <section id="contact" class="contact-section py-24 bg-black relative">
         <div class="py-24">
             <div class="container mx-auto px-4">
                 <h2 class="text-4xl font-bold text-center mb-16 text-white">Contact</h2>
