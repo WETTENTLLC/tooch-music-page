@@ -564,7 +564,11 @@
             box-shadow: 0 10px 25px rgba(100, 149, 237, 0.2);
             transition: all 0.3s ease;
             cursor: pointer;
-        }.video-thumbnail:hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail:hover {
             transform: translateY(-5px) scale(1.02);
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 15px 30px rgba(100, 149, 237, 0.3);
@@ -587,6 +591,51 @@
             color: #333;
             line-height: 1.4;
             opacity: 0.8;
+        }
+        
+        /* Press Kit Tabs Styles */
+        .press-kit-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tab-link {
+            padding: 8px 20px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            border-radius: 30px;
+        }
+        
+        .tab-link:hover::before, .tab-link.active::before {
+            transform: scaleX(1);
+        }
+        
+        .tab-link:hover, .tab-link.active {
+            color: white !important;
+            box-shadow: 0 6px 15px rgba(255, 107, 157, 0.3);
+            transform: translateY(-2px);
         }
 
         /* Modal Styles for Image Popup */
@@ -709,9 +758,7 @@
             pointer-events: none;
             z-index: 3;
             animation: floatSparkle 4s ease-in-out infinite;
-        }
-
-        .logo-container .floating-sparkle:nth-child(1) {
+        }        .logo-container .floating-sparkle:nth-child(1) {
             top: 10%;
             left: 10%;
             animation-delay: 0s;
@@ -720,19 +767,47 @@
         .logo-container .floating-sparkle:nth-child(2) {
             top: 20%;
             right: 15%;
-            animation-delay: 1s;
+            animation-delay: 0.5s;
+            font-size: 1.8rem;
         }
 
         .logo-container .floating-sparkle:nth-child(3) {
             bottom: 15%;
             left: 20%;
-            animation-delay: 2s;
+            animation-delay: 1s;
         }
 
         .logo-container .floating-sparkle:nth-child(4) {
             bottom: 10%;
             right: 10%;
+            animation-delay: 1.5s;
+            font-size: 1.7rem;
+        }
+        
+        .logo-container .floating-sparkle:nth-child(5) {
+            top: 15%;
+            left: 30%;
+            animation-delay: 2s;
+        }
+        
+        .logo-container .floating-sparkle:nth-child(6) {
+            top: 40%;
+            right: 20%;
+            animation-delay: 2.5s;
+            font-size: 1.8rem;
+        }
+        
+        .logo-container .floating-sparkle:nth-child(7) {
+            bottom: 20%;
+            left: 15%;
             animation-delay: 3s;
+            font-size: 1.7rem;
+        }
+        
+        .logo-container .floating-sparkle:nth-child(8) {
+            bottom: 35%;
+            right: 25%;
+            animation-delay: 3.5s;
         }
 
         @keyframes floatSparkle {
@@ -758,6 +833,44 @@
                 max-width: 280px;
             }
         }
+
+        /* Video Thumbnail Styles */
+        .thumbnail-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0px;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .video-thumbnail:hover .play-overlay {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+        }
+        
+        #modalVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -779,23 +892,37 @@
 
     <div class="press-kit-container">        <header class="header">
             <!-- Logo in Header - Large with Rainbow Animation -->
-            <div class="logo-container" style="text-align: center; margin-bottom: 10px; position: relative;">
-                <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo">
-                <!-- Floating sparkles around logo -->
+            <div class="logo-container" style="text-align: center; margin-bottom: 10px; position: relative;">                <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo">
+                <!-- Floating sparkles and dollar signs around logo -->
                 <span class="floating-sparkle">✨</span>
-                <span class="floating-sparkle">🌟</span>
-                <span class="floating-sparkle">💫</span>
+                <span class="floating-sparkle">💲</span>
                 <span class="floating-sparkle">⭐</span>
-            </div>
-            <!-- Official Press Kit text under logo -->
+                <span class="floating-sparkle">💰</span>
+                <span class="floating-sparkle">✨</span>
+                <span class="floating-sparkle">💵</span>
+                <span class="floating-sparkle">💸</span>
+                <span class="floating-sparkle">⭐</span>
+            </div>            <!-- Official Press Kit text under logo -->
             <div style="text-align: center; margin-bottom: 20px;">
                 <p class="subtitle">Official Press Kit 💖</p>
             </div>
-        </header><div class="main-content">
-            <div class="artist-image-section">
-                <img src="dropbox/tooch-press.jpg" alt="Tooch Magooch - Official Press Photo" class="artist-image">
-                <p class="download-text">📸 High-resolution press photos available for download</p>
-            </div>            <div class="bio-section">
+            
+            <!-- Navigation Tabs -->
+            <div class="press-kit-tabs" style="display: flex; justify-content: center; margin-top: 20px; gap: 20px;">
+                <a href="#" class="tab-link active" style="padding: 8px 20px; color: #ff6b9d; font-weight: 600; text-decoration: none; border-radius: 30px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">Press Kit</a>
+                <a href="index.html#media" class="tab-link" style="padding: 8px 20px; color: #8b5a3c; font-weight: 600; text-decoration: none; border-radius: 30px; background: rgba(255, 255, 255, 0.3); transition: all 0.3s ease;">Media Gallery</a>
+                <a href="index.html" class="tab-link" style="padding: 8px 20px; color: #8b5a3c; font-weight: 600; text-decoration: none; border-radius: 30px; background: rgba(255, 255, 255, 0.3); transition: all 0.3s ease;">Main Site</a>
+            </div>
+        </header><div class="main-content">            <div class="artist-image-section" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 700px;">
+                <div>
+                    <img src="dropbox/tooch-press.jpg" alt="Tooch Magooch - Official Press Photo" class="artist-image" style="margin-bottom: 20px; width: 100%;">
+                    <p class="download-text" style="margin-bottom: 20px;">📸 High-resolution press photos available for download</p>
+                </div>
+                <div>
+                    <!-- Second image positioned at the bottom of the left frame -->
+                    <img src="dropbox/tooch5.jpg" alt="Tooch Magooch - Additional Photo" class="artist-image" style="width: 100%; max-height: 300px; object-fit: cover;">
+                </div>
+            </div><div class="bio-section">
                 <h2 class="section-title">About Tooch Magooch 🎤</h2>
                 <h3 class="bio-text" style="font-size: 1.3rem; font-weight: 600; color: #ff6b9d; margin-bottom: 15px;">The Unstoppable Force of Sacramento Hip-Hop</h3>
                 <p class="bio-text">
@@ -804,7 +931,7 @@
                 
                 <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">The Sound & The Vision</h4>
                 <p class="bio-text">
-                    With production that hits like a freight train and lyrics that cut through the noise, Tooch's music is a raw celebration of independence, hustle, and feminine power. Her sound fuses trunk-rattling 808s with razor-sharp wordplay, drawing inspiration from legends like Tupac and Cardi B while carving a lane entirely her own. Tracks like the anthemic <strong>"Munyunn"</strong> (2023/2025) and the defiant "1942" (2024) have become street hymns, streaming in the millions and dominating local airwaves. Her latest singles—"PRESS" and "Bad Bitch Behavior"—showcase an artist refining her craft while staying rooted in the unvarnished truths of her journey.
+                    With production that hits like a freight train and lyrics that cut through the noise, Tooch's music is a raw celebration of independence, hustle, and feminine power. Her sound fuses trunk-rattling 808s with razor-sharp wordplay, drawing inspiration from legends like Tupac and Cardi B while carving a lane entirely her own. Tracks like the anthemic <strong>"Munyunn"</strong> (2023/2025) and the defiant "1942" (2024) have become street hymns, streaming in the millions and dominating local airwaves. Her latest single—"PRESS"—showcases an artist refining her craft while staying rooted in the unvarnished truths of her journey.
                 </p>
                 
                 <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">From Sac-Town to the Main Stage</h4>
@@ -854,10 +981,9 @@
         <div class="music-section">
             <h2 class="section-title">Music Player 🎵</h2>
             
-            <div class="lollipop-player-container">
-                <!-- Hidden audio element for actual playback -->
+            <div class="lollipop-player-container">                <!-- Hidden audio element for actual playback -->
                 <audio id="press-kit-audio" preload="metadata" style="display: none;">
-                    <source src="dropbox/ytmp3free.cc_tooch-magooch-munyunn-official-music-video-youtubemp3free.org.mp3" type="audio/mpeg">
+                    <source src="dropbox/PRESS MASTER .mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
                 
@@ -867,8 +993,8 @@
                 </div>
                 
                 <div class="lollipop-player">
-                    <div class="lollipop-center">                        <div class="track-info">
-                            <div class="track-title">Munyunn</div>
+                    <div class="lollipop-center">                    <div class="track-info">
+                            <div class="track-title">PRESS</div>
                             <div class="track-artist">Tooch Magooch</div>
                         </div>
                         <div class="player-controls">
@@ -886,6 +1012,16 @@
                 </div>
             </div>            <ul class="playlist">                <li class="flex justify-between items-center">
                     <div>
+                        <div class="track-name">PRESS</div>
+                        <div class="text-sm opacity-70" style="color: rgba(51, 51, 51, 0.7);">Tooch Magooch</div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span style="color: rgba(51, 51, 51, 0.9);">3:30</span>
+                        <button style="color: rgba(51, 51, 51, 0.9);"><i class="fas fa-play"></i></button>
+                    </div>
+                </li>
+                <li class="flex justify-between items-center">
+                    <div>
                         <div class="track-name">Munyunn</div>
                         <div class="text-sm opacity-70" style="color: rgba(51, 51, 51, 0.7);">Tooch Magooch</div>
                     </div>
@@ -894,7 +1030,7 @@
                         <button style="color: rgba(51, 51, 51, 0.9);"><i class="fas fa-play"></i></button>
                     </div>
                 </li>
-            </ul>            <div class="streaming-platforms">
+            </ul><div class="streaming-platforms">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap;">
                     <a href="https://instagram.com/tooch_magooch" class="platform-btn" target="_blank">
                         <i class="fab fa-instagram"></i> Instagram
@@ -906,12 +1042,12 @@
             </div>
         </div>        <div class="video-section">
             <h2 class="section-title">Video & Photos 🎬📸</h2>
-              <div class="video-container">
-                <div class="aspect-w-16">                    <iframe 
-                        src="https://www.youtube.com/embed/o1n4es-69t0?si=pXT5MUqWp2H8mDte" 
+              <div class="video-container">                <div class="aspect-w-16">                    <iframe 
+                        src="https://www.youtube.com/embed/_lLOPdnGlOM?si=YIXZi9jwLIeFDLns" 
                         title="Tooch Magooch - Munyunn (Official Music Video)"
                         frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen>
                     </iframe>
                 </div>
@@ -939,8 +1075,40 @@
             <span class="close-modal" onclick="closeImageModal()">&times;</span>
             <div class="modal-content" onclick="event.stopPropagation()">
                 <img id="modalImage" src="" alt="Tooch Magooch - Large View">
+            </div>        </div>
+
+        <!-- Performance Videos Section (Added Below Videos & Photos) -->
+        <div class="section">
+            <h2 class="section-title">Performance Videos 🎭🔥</h2>
+            <div class="video-grid">
+                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video-output-F932FE5A-CD13-41CE-9176-FB1A605F5A24-1.MOV')">
+                    <video src="dropbox/video-output-F932FE5A-CD13-41CE-9176-FB1A605F5A24-1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video-output-3379E644-CE11-41ED-9881-62D607C8E317-1.MOV')">
+                    <video src="dropbox/video-output-3379E644-CE11-41ED-9881-62D607C8E317-1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video oct 14 2024, 11 50 14 pm.MOV')">
+                    <video src="dropbox/video oct 14 2024, 11 50 14 pm.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-46-57_1.MOV')">
+                    <video src="dropbox/ScreenRecording_06-07-2025 00-46-57_1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
+                  <div class="video-thumbnail" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV')">
+                    <video src="dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
             </div>
-        </div>        <div class="contact-section">
+        </div>
+        
+        <!-- Contact Section (Moved below Performance Videos) -->
+        <div class="contact-section">
             <h2 class="section-title">Contact 📞</h2>
             
             <!-- Header Text moved to Contact - removed "Official Press Kit" -->
@@ -964,11 +1132,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- Video Modal -->
+        <div id="videoModal" class="image-modal" onclick="closeVideoModal()">
+            <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+            <div class="modal-content video-modal-content" onclick="event.stopPropagation()">
+                <video id="modalVideo" controls></video>
+            </div>
+        </div>
     </div>    <script>
         // Simple music player functionality for press kit
-        class PressKitMusicPlayer {
-            constructor() {
-                this.tracks = [
+        class PressKitMusicPlayer {            constructor() {                this.tracks = [
+                    { 
+                        title: "PRESS", 
+                        artist: "Tooch Magooch", 
+                        duration: "3:30",
+                        src: "dropbox/PRESS MASTER .mp3"
+                    },
                     { 
                         title: "Munyunn", 
                         artist: "Tooch Magooch", 
@@ -976,7 +1156,7 @@
                         src: "dropbox/ytmp3free.cc_tooch-magooch-munyunn-official-music-video-youtubemp3free.org.mp3"
                     }
                 ];
-                this.currentTrack = 0;
+                this.currentTrack = 0; // Ensure we start with the first track (PRESS)
                 this.isPlaying = false;
                 this.progressInterval = null;
                 this.currentTime = 0;
@@ -990,7 +1170,7 @@
                 this.updateTrackInfo();
             }            createAudioElement() {
                 this.audio = new Audio();
-                this.audio.src = this.tracks[this.currentTrack].src;
+                this.audio.src = this.tracks[0].src; // Explicitly use the first track (PRESS)
                 this.audio.preload = 'metadata';
                 
                 // Show user interaction notice
@@ -1070,7 +1250,12 @@
                 if (this.isPlaying) {
                     this.audio.pause();
                     this.isPlaying = false;
-                } else {
+                } else {                    // Set the current time to 21 seconds if it's the PRESS track (first track)
+                    if (this.currentTrack === 0 && this.currentTime === 0) {
+                        this.audio.currentTime = 21;
+                        this.currentTime = 21;
+                    }
+                    
                     const playPromise = this.audio.play();
                     if (playPromise !== undefined) {
                         playPromise.then(() => {
@@ -1088,17 +1273,21 @@
                 }
                 
                 this.updatePlayButton();
-            }
-
-            playTrack(index) {
+            }            playTrack(index) {
                 if (!this.audio) return;
                 
                 this.currentTrack = index;
                 this.audio.src = this.tracks[this.currentTrack].src;
                 this.audio.currentTime = 0;
                 this.currentTime = 0;
+                
+                // If it's the PRESS track (index 0), set start time to 22 seconds
+                if (index === 0) {                    this.audio.currentTime = 21;
+                    this.currentTime = 21;
+                }
+                
                 this.updateTrackInfo();
-                this.updateProgressBar(0);
+                this.updateProgressBar(index === 0 ? (22 / this.audio.duration * 100) : 0);
                 
                 if (this.isPlaying) {
                     this.audio.play().catch((error) => {
@@ -1201,26 +1390,72 @@
             document.body.style.overflow = 'auto'; // Restore scrolling
         }
 
+        // Video Modal Functions
+        function openVideoModal(videoSrc) {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modal.style.display = 'block';
+            modalVideo.src = videoSrc;
+            modalVideo.play();
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modal.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.src = ""; // Reset source to stop video
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
         // Close modal with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeImageModal();
+                closeVideoModal();
             }
-        });
-
-        // Video thumbnail functionality (keeping for any future video thumbnails)
-        document.addEventListener('DOMContentLoaded', () => {
+        });        // Video thumbnail functionality (keeping for any future video thumbnails)        document.addEventListener('DOMContentLoaded', () => {
             const videoThumbnails = document.querySelectorAll('.video-thumbnail');
-            videoThumbnails.forEach(thumbnail => {
-                // Only add click handler if it doesn't already have onclick (for images)
-                if (!thumbnail.hasAttribute('onclick')) {
-                    thumbnail.addEventListener('click', () => {
-                        const title = thumbnail.querySelector('.video-title')?.textContent || 'Media';
-                        alert(`🎬 Opening: ${title}\n\nThis would normally open the video in a modal or new window.`);
-                    });
-                }
+            videoThumbnails.forEach(thumbnail => {                // Track info elements update
+                const titleElement = document.querySelector('.track-title');
+                const artistElement = document.querySelector('.track-artist');
+
+                if (titleElement) titleElement.textContent = "PRESS";
+                if (artistElement) artistElement.textContent = "Tooch Magooch";
+
+                // Auto-play the first track
+                setTimeout(() => {
+                    const playButton = document.querySelector('.play-button');
+                    if (playButton) {
+                        playButton.click();
+                    }
+                }, 1500); // Small delay to ensure everything is loaded
             });
-        });
+            
+            // Tab link hover effect
+            const tabLinks = document.querySelectorAll('.tab-link');
+            tabLinks.forEach(tab => {
+                tab.addEventListener('mouseenter', () => {
+                    // Add sparkle effect on hover
+                    const sparkle = document.createElement('span');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.fontSize = '12px';
+                    sparkle.style.zIndex = '3';
+                    sparkle.style.animation = 'sparkle 1s ease-in-out forwards';
+                    tab.appendChild(sparkle);
+                    
+                    // Remove sparkle after animation completes
+                    setTimeout(() => {
+                        if (sparkle && sparkle.parentNode === tab) {
+                            tab.removeChild(sparkle);
+                        }
+                    }, 1000);
+                });
+            });
     </script>
 </body>
 </html>
