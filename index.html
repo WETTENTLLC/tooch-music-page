@@ -88,26 +88,45 @@
                 opacity: 1;
             }
         }
-        
-        .bio-text {
+          .bio-text {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #333;
-            opacity: 0.9;
+            color: #ffffff;
+            opacity: 0.95;
             margin-bottom: 20px;
-        }
-        
-        .artist-card {
-            backdrop-filter: blur(20px);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }        .artist-card {
+            backdrop-filter: blur(10px);
             background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.25) 0%,
-                rgba(255, 182, 193, 0.3) 50%,
-                rgba(255, 255, 255, 0.25) 100%
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(30, 30, 30, 0.8) 50%,
+                rgba(0, 0, 0, 0.7) 100%
             );
             border-radius: 30px;
             padding: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 15px 35px rgba(100, 149, 237, 0.3);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* About Section Specific Overrides */
+        .about-section .artist-card {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(40, 40, 40, 0.95) 50%,
+                rgba(0, 0, 0, 0.9) 100%
+            );
+            border: 2px solid rgba(255, 107, 157, 0.6);
+            margin-bottom: 2rem;
+        }
+        
+        .about-section .section-title {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 3rem;
+        }
+        
+        .about-section {
+            margin-bottom: 0;
+            border-bottom: 3px solid rgba(255, 107, 157, 0.3);
         }
         
         /* Progress bar styling */
@@ -237,6 +256,27 @@
         #closeMediaModal:hover {
             background: rgba(255, 255, 255, 0.4);
         }
+        
+        /* About Section Specific Overrides */
+        .about-section .artist-card {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(40, 40, 40, 0.9) 50%,
+                rgba(0, 0, 0, 0.85) 100%
+            );
+            border: 2px solid rgba(255, 107, 157, 0.5);
+            margin-bottom: 2rem;
+        }
+        
+        .about-section .section-title {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 3rem;
+        }
+        
+        .about-section {
+            margin-bottom: 0;
+            border-bottom: 3px solid rgba(255, 107, 157, 0.3);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-[#667eea] to-[#764ba2] min-h-screen text-white">
@@ -270,7 +310,7 @@
                 <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
                 <a href="#media" class="hover:text-purple-200 transition">Media</a>
                 <a href="#merch" class="hover:text-purple-200 transition">Merch</a>
-                <a href="#tour" class="hover:text-purple-200 transition">Tour</a>                <a href="#about" class="hover:text-purple-200 transition">About</a>
+                <a href="#tour" class="hover:text-purple-200 transition text-[#ff6b9d]">Tour</a>                <a href="#about" class="hover:text-purple-200 transition">About</a>
                 <a href="press-kit.html" class="hover:text-purple-200 transition">Press Kit</a>
                 <a href="#contact" class="hover:text-purple-200 transition">Contact</a>
             </div>
@@ -286,9 +326,8 @@
         </div>
     </nav>    <!-- Hero Section -->
     <section class="snap-section relative">
-        <div class="absolute inset-0 bg-black/50 z-10"></div>
-        <div class="absolute inset-0 z-0">
-            <img id="hero-image" src="dropbox/Header Image.jpg" alt="Hero Image" class="w-full h-full object-cover">        </div>        <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">            <div class="logo-container mb-8" style="max-width: 400px;">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#667eea] to-[#764ba2] z-10"></div>
+        <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">            <div class="logo-container mb-8" style="max-width: 800px;">
                 <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo w-full">
                 <span class="floating-sparkle">✨</span>
                 <span class="floating-sparkle">💲</span>
@@ -298,7 +337,7 @@
             <p class="text-xl md:text-2xl mb-8">Latest Single: "PRESS" - Out Now</p>
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                 <a href="#music" class="bg-pink-600 hover:bg-pink-700 px-8 py-3 rounded-full transition">LISTEN NOW</a>
-                <a href="#tour" class="border-2 border-white hover:bg-white hover:text-purple-900 px-8 py-3 rounded-full transition">TOUR DATES</a>
+                <a href="#tour" class="border-2 border-white hover:bg-white hover:text-purple-900 px-8 py-3 rounded-full transition text-white">TOUR DATES</a>
             </div>
         </div>
     </section><!-- Music Section with Rainbow Lollipop Player -->
@@ -348,8 +387,7 @@
                       <!-- Track List -->
                     <div class="w-full lg:w-96">
                         <div class="artist-card">
-                            <h3 class="text-2xl font-bold mb-4 text-[#ff6b9d]">Featured Tracks</h3>
-                            <ul class="playlist">
+                            <h3 class="text-2xl font-bold mb-4 text-[#ff6b9d]">Featured Tracks</h3>                            <ul class="playlist">
                                 <li class="flex justify-between items-center py-3 border-b border-[#ff6b9d]/20 hover:bg-white/10 transition rounded px-2 cursor-pointer">
                                     <div>
                                         <div class="font-medium text-[#ff6b9d]">PRESS</div>
@@ -366,18 +404,8 @@
                                         <div class="text-sm opacity-70">Tooch Magooch</div>
                                     </div>
                                     <div class="flex items-center space-x-3">
-                                        <span>3:45</span>
+                                        <span>2:45</span>
                                         <button class="track-play-btn" data-track="1"><i class="fas fa-play"></i></button>
-                                    </div>
-                                </li>
-                                <li class="flex justify-between items-center py-3 border-b border-[#ff6b9d]/20 hover:bg-white/10 transition rounded px-2 cursor-pointer">
-                                    <div>
-                                        <div class="font-medium text-[#ff6b9d]">Sugar Rush</div>
-                                        <div class="text-sm opacity-70">Tooch Magooch</div>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <span>4:12</span>
-                                        <button class="track-play-btn" data-track="2"><i class="fas fa-play"></i></button>
                                     </div>
                                 </li>
                             </ul>
@@ -394,14 +422,15 @@
                     </div>
                 </div>
             </div>
-        </div>    </section>    <!-- About Section with Gradient Fade - Moved after Music -->    <section id="about" class="about-section snap-section relative">
+        </div>    </section>    <!-- About Section with Gradient Fade - Moved after Music -->    
+    <section id="about" class="about-section snap-section relative">
         <!-- Gradient fade from white to black -->
         <div class="gradient-fade-to-black"></div>
         
-        <div class="relative z-10 py-24">
+        <div class="relative z-10 py-16">
             <div class="container mx-auto px-4">
-                <h2 class="section-title text-center mb-16 text-white">About Tooch Magooch 🎤</h2>
-                <div class="flex flex-col md:flex-row gap-8 items-start">
+                <h2 class="section-title text-center mb-12 text-white">About Tooch Magooch 🎤</h2>
+                <div class="flex flex-col md:flex-row gap-8 items-start max-w-6xl mx-auto">
                     <div class="w-full md:w-1/3">
                         <div class="artist-card text-center">
                             <img src="dropbox/tooch-press.jpg" alt="Artist Profile" class="w-full h-auto rounded-2xl mb-6 border-4 border-[#ff6b9d] object-cover">
@@ -433,7 +462,7 @@
                 </div>
             </div>
         </div>
-    </section>    <!-- Videos Section -->    <section id="videos" class="snap-section bg-black/30">
+    </section><!-- Videos Section -->    <section id="videos" class="snap-section bg-black/30">
         <div class="container mx-auto px-4 py-24">
             <h2 class="section-title text-center mb-16">Videos & Photos 🎬📸</h2>
             
@@ -755,8 +784,7 @@
     <script>
         // Simple music player functionality for main site
         class MainSiteMusicPlayer {
-            constructor() {
-                this.tracks = [
+            constructor() {                this.tracks = [
                     { 
                         title: "PRESS", 
                         artist: "Tooch Magooch", 
@@ -766,14 +794,8 @@
                     { 
                         title: "Munyunn", 
                         artist: "Tooch Magooch", 
-                        duration: "3:45",
-                        src: "dropbox/ytmp3free.cc_tooch-magooch-munyunn-official-music-video-youtubemp3free.org.mp3"
-                    },
-                    { 
-                        title: "Sugar Rush", 
-                        artist: "Tooch Magooch", 
-                        duration: "4:12",
-                        src: "dropbox/ytmp3free.cc_tooch-magooch-munyunn-official-music-video-youtubemp3free.org.mp3"
+                        duration: "2:45",
+                        src: "dropbox/first performance video.mp3"
                     }
                 ];
                 this.currentTrack = 0; // Start with PRESS

@@ -1,9 +1,8 @@
 // Image Configuration for Tooch Magooch Music Page
-const imageConfig = {
-    // Hero section images
+const imageConfig = {    // Hero section images
     hero: {
-        main: 'dropbox/Header Image.jpg',
-        fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjYwMCIgeT0iMzAwIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjQ4IiBmb250LWZhbWlseT0iQXJpYWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIwLjNlbSI+VE9PQ0ggTUFHT09DSDwvdGV4dD4KPC9zdmc+'
+        main: 'dropbox/tooch-header.jpg',
+        fallback: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjwvc3ZnPg=='
     },
     
     // Profile/About section images
