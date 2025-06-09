@@ -1,5 +1,35 @@
 /* Tooch Magooch Music Page - Main Styles */
 
+/* Global Styles - Unified Purple to Soft Pink Gradient Background */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #8e44ad 0%,    /* Deep purple */
+        #9b59b6 20%,   /* Medium purple */
+        #c44569 40%,   /* Purple-pink */
+        #e91e63 60%,   /* Pink */
+        #f8b5d0 80%,   /* Soft pink */
+        #fce4ec 100%   /* Very soft pink */
+    );
+    background-size: 400% 400%;
+    animation: unifiedGradientFlow 20s ease-in-out infinite;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+@keyframes unifiedGradientFlow {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* Custom utility classes */
 .rounded-15 {
     border-radius: 15px;
@@ -337,54 +367,114 @@
     border-radius: 50%;
     pointer-events: none;
     z-index: 5;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.8;
-    animation: bubbleFloat 8s linear infinite;
+    opacity: var(--bubble-opacity, 0.9);
+    animation: bubbleFloat 15s linear infinite;
+    transform: rotate(var(--bubble-rotation, 0deg));
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.photo-bubble .bubble-image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-bubble .bubble-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 50%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.photo-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
 }
 
 @keyframes bubbleFloat {
     0% {
-        transform: translateY(100vh) scale(0.5);
+        transform: translateY(10vh) scale(0.3) rotate(var(--bubble-rotation, 0deg));
         opacity: 0;
     }
-    10% {
-        opacity: 0.8;
+    15% {
+        opacity: var(--bubble-opacity, 0.9);
+        transform: translateY(5vh) scale(0.6) rotate(calc(var(--bubble-rotation, 0deg) + 30deg));
     }
-    90% {
-        opacity: 0.8;
+    50% {
+        transform: translateY(-30vh) scale(1) rotate(calc(var(--bubble-rotation, 0deg) + 180deg));
+        opacity: var(--bubble-opacity, 0.9);
+    }
+    85% {
+        opacity: var(--bubble-opacity, 0.8);
+        transform: translateY(-70vh) scale(0.8) rotate(calc(var(--bubble-rotation, 0deg) + 330deg));
     }
     100% {
-        transform: translateY(-100px) scale(1);
+        transform: translateY(-90vh) scale(0.5) rotate(calc(var(--bubble-rotation, 0deg) + 360deg));
         opacity: 0;
     }
 }
 
-/* Simple Bubbles */
-.simple-bubble {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 3;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
-    animation: simpleBubbleFloat 6s linear infinite;
+/* Responsive adjustments for photo bubbles */
+@media (max-width: 768px) {
+    .photo-bubble {
+        /* Reduce bubble sizes on mobile for better performance */
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    @keyframes bubbleFloat {
+        0% {
+            transform: translateY(100vh) scale(0.2) rotate(var(--bubble-rotation, 0deg));
+            opacity: 0;
+        }
+        10% {
+            opacity: var(--bubble-opacity, 0.7);
+            transform: translateY(90vh) scale(0.4) rotate(calc(var(--bubble-rotation, 0deg) + 30deg));
+        }
+        50% {
+            transform: translateY(50vh) scale(0.7) rotate(calc(var(--bubble-rotation, 0deg) + 180deg));
+        }
+        90% {
+            opacity: var(--bubble-opacity, 0.7);
+            transform: translateY(10vh) scale(0.8) rotate(calc(var(--bubble-rotation, 0deg) + 330deg));
+        }
+        100% {
+            transform: translateY(-10vh) scale(0.6) rotate(calc(var(--bubble-rotation, 0deg) + 360deg));
+            opacity: 0;
+        }
+    }
 }
 
-@keyframes simpleBubbleFloat {
-    0% {
-        transform: translateY(100vh) scale(0);
-        opacity: 0;
+@media (max-width: 480px) {
+    .photo-bubble {
+        /* Further reduce on very small screens */
+        max-width: 80px;
+        max-height: 80px;
+        border-width: 1px;
     }
-    10% {
-        opacity: 0.6;
-        transform: scale(1);
+}
+
+/* High-performance mode for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+    .photo-bubble {
+        animation-duration: 15s; /* Slower animation */
+        transform: none !important; /* Remove rotation */
     }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-100px) scale(0.5);
-        opacity: 0;
+    
+    .photo-bubble:hover {
+        transform: scale(1.02) !important; /* Minimal hover effect */
     }
 }
 
@@ -395,18 +485,23 @@ input:focus, textarea:focus {
 
 /* Section Layout Improvements */
 
-/* Music Section Styling */
+/* Music Section Styling - fully transparent to show unified background */
 #music {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: transparent;
 }
 
-/* About Section with Gradient Fade */
+/* About Section - Transparent to show unified gradient */
 .about-section {
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    background: transparent;
     position: relative;
-    min-height: auto;
-    padding: 4rem 0;
+    min-height: 100vh;
+    max-height: 120vh;
+    height: auto;
+    padding: 4rem 0 8rem 0;
     overflow: hidden;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Ensure About section content is visible */
@@ -414,6 +509,9 @@ input:focus, textarea:focus {
     position: relative;
     z-index: 30;
     padding: 2rem 0;
+    height: auto;
+    max-height: calc(120vh - 12rem);
+    overflow-y: auto;
 }
 
 .gradient-fade-to-black {
@@ -424,22 +522,17 @@ input:focus, textarea:focus {
     height: 100px;
     background: linear-gradient(
         to bottom,
-        rgba(102, 126, 234, 0.8) 0%,
-        rgba(102, 126, 234, 0.4) 30%,
-        rgba(118, 75, 162, 0.2) 60%,
-        rgba(0, 0, 0, 0.1) 100%
+        rgba(155, 89, 182, 0.8) 0%,
+        rgba(155, 89, 182, 0.4) 30%,
+        rgba(233, 30, 99, 0.2) 60%,
+        rgba(233, 30, 99, 0.1) 100%
     );
     z-index: 5;
 }
 
-/* Contact Section Styling */
+/* Contact Section - Transparent to show unified gradient */
 .contact-section {
-    background: linear-gradient(
-        135deg,
-        #000000 0%,
-        #1a1a1a 50%,
-        #000000 100%
-    );
+    background: transparent;
 }
 
 /* Enhanced Music Player Container */
@@ -451,30 +544,13 @@ input:focus, textarea:focus {
     margin: 0 auto;
 }
 
-/* Improved Section Spacing */
+/* Improved Section Spacing - All sections transparent to show unified gradient */
 section {
     position: relative;
     z-index: 5;
-    transition: all 0.3s ease;
-}
-
-/* Natural Section Spacing for Smooth Scrolling */
-#videos, #media, #merch, #tour, #contact {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-}
-
-/* Better visual separation between sections */
-#videos {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#media {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#contact {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    min-height: 100vh;
+    padding: 2rem 0;
 }
 
 /* Enhanced Form Styling for Contact */
@@ -609,17 +685,17 @@ section {
 }
 
 /* Hero Section Enhancement */
-.hero-section.relative {
+.snap-section.relative {
     height: 100vh;
     min-height: 100vh;
 }
 
-.hero-section.relative .absolute.inset-0.bg-black\/50 {
+.snap-section.relative .absolute.inset-0.bg-black\/50 {
     background: rgba(0, 0, 0, 0.4);
     z-index: 10;
 }
 
-.hero-section.relative .relative.z-20 {
+.snap-section.relative .relative.z-20 {
     z-index: 30;
     height: 100vh;
     display: flex;
@@ -642,13 +718,13 @@ section {
 }
 
 /* Hero text enhancement */
-.hero-section.relative h1 {
+.snap-section.relative h1 {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     position: relative;
     z-index: 40;
 }
 
-.hero-section.relative p {
+.snap-section.relative p {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
     position: relative;
     z-index: 40;
@@ -656,30 +732,30 @@ section {
 
 /* Mobile Hero Section Positioning */
 @media (max-width: 768px) {
-    .hero-section.relative .relative.z-20 {
+    .snap-section.relative .relative.z-20 {
         justify-content: flex-end;
         padding-bottom: 8rem;
     }
     
-    .hero-section.relative h1 {
+    .snap-section.relative h1 {
         font-size: 3rem;
         margin-bottom: 1rem;
     }
     
-    .hero-section.relative p {
+    .snap-section.relative p {
         font-size: 1.125rem;
         margin-bottom: 2rem;
     }
 }
 
-/* Merch and Tour Section Styling */
+/* Merch and Tour Section Styling - Transparent to show unified gradient */
 #merch {
-    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(60, 60, 60, 0.95) 100%);
+    background: transparent;
     color: white;
 }
 
 #tour {
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
+    background: transparent;
     color: white;
 }
 
@@ -721,8 +797,8 @@ section {
 }
 
 /* Ensure Merch and Tour sections are properly visible */
-#merch,
-#tour {
+#merch.snap-section,
+#tour.snap-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -823,11 +899,15 @@ section {
     );
     border: 2px solid rgba(255, 107, 157, 0.6);
     margin-bottom: 2rem;
+    max-height: none;
+    height: auto;
 }
 
 .about-section .bio-text {
     color: #ffffff;
     opacity: 0.95;
+    margin-bottom: 1rem;
+    line-height: 1.6;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -836,38 +916,45 @@ section {
     margin-bottom: 3rem;
 }
 
-.about-section {
-    margin-bottom: 0;
-    border-bottom: 3px solid rgba(255, 107, 157, 0.3);
-}
-
 /* Enhanced text readability */
 .about-section strong {
     color: #ff6b9d;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-/* Mobile Menu Styles */
+/* Mobile responsiveness fixes for About section */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 2rem 0 4rem 0;
+        max-height: none;
+    }
+    
+    .about-section .relative.z-10 {
+        max-height: none;
+        overflow-y: visible;
+    }
+    
+    .about-section .artist-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Mobile Menu Styling */
 .mobile-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -300px;
     width: 300px;
     height: 100vh;
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.95) 0%,
-        rgba(40, 40, 40, 0.95) 50%,
-        rgba(20, 20, 20, 0.95) 100%
-    );
-    backdrop-filter: blur(20px);
-    border-left: 2px solid rgba(255, 107, 157, 0.3);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    transition: right 0.3s ease;
+    background: linear-gradient(135deg, #9b59b6 0%, #e91e63 100%);
+    backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    padding: 2rem 1.5rem;
-    padding-top: 6rem;
+    padding: 5rem 2rem;
+    transition: all 0.3s ease;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
 }
 
 .mobile-menu.active {
@@ -875,64 +962,43 @@ section {
 }
 
 .mobile-menu a {
-    color: #ffffff;
-    text-decoration: none;
+    color: white;
     font-size: 1.2rem;
-    font-weight: 500;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 107, 157, 0.2);
-    transition: all 0.3s ease;
-    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
 }
 
 .mobile-menu a:hover {
-    color: #ff6b9d;
     transform: translateX(10px);
-    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+    color: #f8f9fa;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .mobile-menu .close-menu {
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
     border: none;
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
+    font-size: 1.5rem;
     cursor: pointer;
-    font-size: 1rem;
-    margin-top: 2rem;
-    transition: all 0.3s ease;
-    align-self: center;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
 }
 
 .mobile-menu .close-menu:hover {
-    background: linear-gradient(135deg, #c44569, #ff6b9d);
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
-}
-
-/* Mobile menu button styling */
-nav button.md\:hidden {
-    background: linear-gradient(135deg, rgba(255, 107, 157, 0.8), rgba(196, 69, 105, 0.8));
-    border: 2px solid rgba(255, 107, 157, 0.6);
-    border-radius: 8px;
-    padding: 0.5rem;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-}
-
-nav button.md\:hidden:hover {
-    background: linear-gradient(135deg, rgba(196, 69, 105, 0.9), rgba(255, 107, 157, 0.9));
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
-}
-
-nav button.md\:hidden i {
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
 /* Mobile menu overlay */
@@ -942,8 +1008,8 @@ nav button.md\:hidden i {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -955,39 +1021,266 @@ nav button.md\:hidden i {
     visibility: visible;
 }
 
-/* Enhanced navbar background for better visibility */
-nav.fixed {
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(40, 40, 40, 0.8) 50%,
-        rgba(20, 20, 20, 0.7) 100%
-    );
-    backdrop-filter: blur(15px);
-    border-bottom: 2px solid rgba(255, 107, 157, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+/* Smooth Scrolling - Removed Snap Functionality */
+.section {
+    min-height: 100vh;
+    position: relative;
+    background: transparent;
+    z-index: 5;
 }
 
-/* Ensure nav text is visible */
-nav a {
-    color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+/* Navigation Enhancement */
+nav {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
-nav a:hover {
-    color: #ff6b9d !important;
-    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+nav.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
 }
 
-/* Social media icons in nav */
-nav .fab {
-    color: #ffffff;
-    font-size: 1.1rem;
+/* Animation Effects */
+.fade-target {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Music Player Button Animations */
+.player-button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
     transition: all 0.3s ease;
 }
 
-nav .fab:hover {
-    color: #ff6b9d;
+.player-button:hover:before {
+    width: 100%;
+    height: 100%;
+}
+
+.player-button:active {
+    transform: scale(0.95);
+}
+
+/* Enhanced Backdrop Styling */
+.backdrop-blur-md {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.backdrop-blur-md:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 107, 157, 0.3);
+}
+
+/* Responsive Grid Layouts */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Enhanced Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Form Styling */
+input, textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #9333ea;
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.border-glow {
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.2);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 30px rgba(255, 107, 157, 0.4);
+    transform: scale(1.02);
+}
+
+/* Photo Bubbles Enhancement */
+.photo-bubble {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: brightness(0.8) saturate(0.8);
+}
+
+.photo-bubble:hover {
+    filter: brightness(1.1) saturate(1.2);
     transform: scale(1.1);
-    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+    z-index: 100;
+}
+
+.photo-bubble.active {
+    filter: brightness(1.3) saturate(1.5);
+    transform: scale(1.15);
+    box-shadow: 0 20px 40px rgba(255, 107, 157, 0.4);
+}
+
+/* Video Modal Styling */
+#videoModal {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#videoModal video {
+    background: #000;
+    max-width: 90vw;
+    max-height: 80vh;
+}
+
+#videoModal button {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#videoModal button:hover {
+    background: rgba(255, 107, 157, 0.8);
+    transform: scale(1.1);
+}
+
+/* Video Thumbnail Enhancements */
+.video-item {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.video-item:hover {
+    background: rgba(255, 107, 157, 0.2) !important;
+    transform: translateX(5px);
+}
+
+.video-item .fa-play {
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* About Section Artist Card Height Fix */
+.about-section .artist-card {
+    height: auto !important;
+    min-height: unset;
+    overflow: visible;
+}
+
+.about-section .bio-text {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Videos Section Spacing Fix - Transparent to show unified gradient */
+#videos {
+    background: transparent;
+    position: relative;
+    z-index: 10;
+    margin-top: 2rem;
+    padding-top: 10rem;
+    clear: both;
+    border-top: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Ensure proper section separation with unified gradient */
+.section + .section {
+    margin-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
 }

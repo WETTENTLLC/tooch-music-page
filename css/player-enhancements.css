@@ -1,0 +1,70 @@
+/* Enhanced Play Button Styling */
+.play-button {
+    background: linear-gradient(135deg, #ff6b9d, #c44569) !important;
+    color: white !important;
+    width: 50px;
+    height: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    background: linear-gradient(135deg, #c44569, #ff6b9d) !important;
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.9);
+    transform: scale(1.05);
+}
+
+.track-play-btn {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.track-play-btn:hover {
+    background: linear-gradient(135deg, #c44569, #ff6b9d);
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.7);
+    transform: scale(1.1);
+}
+
+/* Enhanced Music Player Visuals */
+.lollipop-player {
+    box-shadow: 0 0 40px rgba(255, 107, 157, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Play/Pause Icon Enhancement */
+.player-controls i {
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+/* Progress Bar Enhancement */
+.progress-bar {
+    cursor: pointer;
+}
+
+.progress-bar::after {
+    background: linear-gradient(90deg, #ff6b9d, #c44569, #9b59b6);
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+}
+
+/* Music Notice Enhancement */
+#audio-notice {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(233, 30, 99, 0.2)) !important;
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

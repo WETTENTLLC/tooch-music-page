@@ -8,16 +8,15 @@ const musicConfig = {    // Featured tracks data
             album: "Latest Single",
             duration: "3:30",
             file: "dropbox/PRESS MASTER .mp3",
-            cover: "dropbox/tooch-music-player-image.jpg"
-        },
-        {
+            cover: "dropbox/tooch-press.jpg"
+        },        {
             id: 2,
             title: "Munyunn",
             artist: "Tooch Magooch",
-            album: "Live Performance",
-            duration: "2:45",
+            album: "Single",
+            duration: "3:45",
             file: "dropbox/first performance video.mp3",
-            cover: "dropbox/tooch-music-player-image.jpg"
+            cover: "dropbox/tooch-gallery-1.jpg"
         }
     ],
     
@@ -26,14 +25,9 @@ const musicConfig = {    // Featured tracks data
     isPlaying: false,
     
     // Audio element
-    audio: null,
-    
-    // Streaming platforms
+    audio: null,    // Social media platforms
     platforms: {
-        spotify: "https://open.spotify.com/artist/toochmagooch",
-        appleMusic: "https://music.apple.com/artist/toochmagooch", 
-        youtube: "https://youtube.com/@toochie916?si=hNmglTw-oheA_z6G",
-        soundcloud: "https://soundcloud.com/toochmagooch"
+        instagram: "https://instagram.com/tooch_magooch"
     }
 };
 

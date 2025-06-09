@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Bubble Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Direct bubble creation test
+        setTimeout(() => {
+            console.log('Creating direct test bubble...');
+            
+            const bubble = document.createElement('div');
+            bubble.style.cssText = `
+                position: fixed;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                border: 5px solid #ff0000;
+                background: url('dropbox/tooch-press.jpg') center/cover;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                opacity: 1;
+            `;
+            
+            document.body.appendChild(bubble);
+            console.log('Direct bubble added to page');
+            
+            // Add text fallback if image doesn't load
+            const img = new Image();
+            img.onload = () => console.log('Image loaded successfully');
+            img.onerror = () => {
+                console.log('Image failed, adding text');
+                bubble.style.background = '#ff6b9d';
+                bubble.innerHTML = '<div style="color: white; text-align: center; line-height: 140px; font-weight: bold;">BUBBLE</div>';
+            };
+            img.src = 'dropbox/tooch-press.jpg';
+            
+        }, 1000);
+    </script>
+</body>
+</html>

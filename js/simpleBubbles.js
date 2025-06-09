@@ -350,12 +350,12 @@ function initializeSimpleBubbles() {
     });
 }
 
-// Auto-initialize
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeSimpleBubbles);
-} else {
-    initializeSimpleBubbles();
-}
+// Auto-initialize - DISABLED to use PhotoBubbles instead
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', initializeSimpleBubbles);
+// } else {
+//     initializeSimpleBubbles();
+// }
 
 // Export for global access
 window.SimpleBubbles = SimpleBubbles;

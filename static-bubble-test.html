@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Bubble Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        .static-bubble {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #ff0000;
+            z-index: 9999;
+            opacity: 1;
+        }
+        .bubble-image-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+        .bubble-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10000;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="createStaticBubble()" style="background: #667eea; color: white; border: none; padding: 10px; border-radius: 5px; margin: 5px;">Add Static Bubble</button>
+        <button onclick="clearAll()" style="background: #764ba2; color: white; border: none; padding: 10px; border-radius: 5px; margin: 5px;">Clear All</button>
+        <div id="info"></div>
+    </div>
+
+    <script>
+        let bubbleCount = 0;
+        const images = [
+            'dropbox/tooch-press.jpg',
+            'dropbox/tooch5.jpg',
+            'dropbox/tooch7.jpg',
+            'dropbox/tooch-gallery-1.jpg',
+            'dropbox/media2/media1.jpg'
+        ];
+
+        function log(message) {
+            document.getElementById('info').innerHTML += '<br>' + message;
+            console.log(message);
+        }
+
+        function createStaticBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'static-bubble';
+            bubble.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+            bubble.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+
+            const container = document.createElement('div');
+            container.className = 'bubble-image-container';
+
+            const img = document.createElement('img');
+            const imageSrc = images[Math.floor(Math.random() * images.length)];
+            img.src = imageSrc;
+            
+            img.onload = () => {
+                log(`✓ Bubble ${bubbleCount + 1} loaded: ${imageSrc}`);
+            };
+            
+            img.onerror = () => {
+                log(`✗ Bubble ${bubbleCount + 1} failed: ${imageSrc}`);
+                container.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+            };
+
+            container.appendChild(img);
+            bubble.appendChild(container);
+            document.body.appendChild(bubble);
+            
+            bubbleCount++;
+            log(`Created static bubble ${bubbleCount} at (${bubble.style.left}, ${bubble.style.top})`);
+        }
+
+        function clearAll() {
+            const bubbles = document.querySelectorAll('.static-bubble');
+            bubbles.forEach(b => b.remove());
+            log(`Cleared ${bubbles.length} bubbles`);
+            bubbleCount = 0;
+        }
+
+        // Create initial bubble
+        window.addEventListener('load', () => {
+            log('Page loaded, creating test bubble...');
+            createStaticBubble();
+        });
+    </script>
+</body>
+</html>

@@ -199,47 +199,52 @@ class ToochMusicApp {
         document.body.appendChild(overlay);
         document.body.appendChild(mobileNav);
 
-        if (menuButton) {
-            menuButton.addEventListener('click', () => {
-                mobileNav.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            });
-        }
-
-        const closeMenu = () => {
-            mobileNav.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
+        // Mobile menu functionality
+        const toggleMenu = () => {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
         };
-
+        
+        if (menuButton) {
+            menuButton.addEventListener('click', toggleMenu);
+        }
+        
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking close button
         const closeButton = mobileNav.querySelector('.close-menu');
-        closeButton.addEventListener('click', closeMenu);
+        if (closeButton) {
+            closeButton.addEventListener('click', toggleMenu);
+        }
         
-        // Close on overlay click
-        overlay.addEventListener('click', closeMenu);
-        
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-
-        // Close on link click
+        // Close menu when clicking nav links
         mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
+            link.addEventListener('click', () => {
+                toggleMenu();
+                // Smooth scroll to section
+                const targetId = link.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
         });
     }
-
+    
     setupSmoothScrolling() {
-        // Smooth scroll for anchor links
+        // Smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
@@ -247,22 +252,26 @@ class ToochMusicApp {
             });
         });
     }
-
+    
     setupIntersectionObserver() {
-        // Animate elements when they come into view
+        // Enhanced intersection observer for animations
         const animateOnScroll = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
                 }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        document.querySelectorAll('.playlist li, .video-thumbnails > div').forEach(el => {
+        // Observe elements for animation
+        document.querySelectorAll('.artist-card, .media-item, .merch-item').forEach(el => {
             animateOnScroll.observe(el);
         });
     }
-
+    
     setupErrorHandling() {
         // Global error handler
         window.addEventListener('error', (e) => {
@@ -321,78 +330,83 @@ class ToochMusicApp {
     }
 
     initializeExternalComponents() {
-        // Wait for external components to be available
-        setTimeout(() => {
-            // Initialize music system
-            if (typeof initializeMusicSystem === 'function') {
-                initializeMusicSystem();
-                this.components.music = window.musicConfig;
-            }
-
-            // Initialize bubbles
-            if (window.simpleBubbles) {
-                this.components.simpleBubbles = window.simpleBubbles;
-            }
-            
-            if (window.photoBubbles) {
-                this.components.photoBubbles = window.photoBubbles;
-            }
-        }, 1000);
+        // Initialize music player
+        if (typeof MusicPlayer !== 'undefined') {
+            this.components.musicPlayer = new MusicPlayer();
+        }
+        
+        // Initialize photo bubbles
+        if (typeof PhotoBubbles !== 'undefined') {
+            this.components.photoBubbles = new PhotoBubbles();
+        }
+        
+        // Initialize section lock
+        if (typeof SectionLock !== 'undefined') {
+            this.components.sectionLock = new SectionLock();
+        }
     }
-
-    // Utility methods
+    
     showNotification(message, type = 'info') {
         const notification = document.createElement('div');
-        notification.className = `notification notification-${type} fixed top-4 right-4 z-50 px-6 py-3 rounded-md text-white`;
-        notification.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6';
-        notification.textContent = message;
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-message">${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
         
         document.body.appendChild(notification);
         
-        // Animate in
-        setTimeout(() => notification.style.transform = 'translateX(0)', 10);
-        
-        // Remove after delay
+        // Auto remove after 5 seconds
         setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 4000);
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+        
+        // Manual close
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.remove();
+        });
     }
-
+    
     createModal(title, content) {
         const modal = document.createElement('div');
-        modal.className = 'modal-overlay fixed inset-0 bg-black/50 z-50 flex items-center justify-center';
+        modal.className = 'modal-overlay';
         modal.innerHTML = `
-            <div class="modal-content bg-gradient-to-br from-purple-900 to-purple-800 rounded-15 p-6 max-w-md w-full mx-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-white">${title}</h3>
-                    <button class="close-modal text-white text-2xl">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>${title}</h3>
+                    <button class="modal-close">&times;</button>
                 </div>
-                <div class="text-white">${content}</div>
+                <div class="modal-body">
+                    ${content}
+                </div>
             </div>
         `;
         
         document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
         
-        const closeButton = modal.querySelector('.close-modal');
-        closeButton.addEventListener('click', () => this.closeModal(modal));
+        // Close handlers
+        const closeModal = () => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        };
         
+        modal.querySelector('.modal-close').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                this.closeModal(modal);
-            }
+            if (e.target === modal) closeModal();
         });
         
         return modal;
     }
-
+    
     closeModal(modal) {
         if (modal && modal.parentNode) {
-            modal.parentNode.removeChild(modal);
+            modal.remove();
+            document.body.style.overflow = 'auto';
         }
     }
 }

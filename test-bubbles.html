@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Bubbles</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-controls">
+        <h3>Bubble Test Controls</h3>
+        <button onclick="testSingleBubble()">Create Single Bubble</button>
+        <button onclick="testImageLoading()">Test Image Loading</button>
+        <button onclick="startBubbles()">Start Bubbles</button>
+        <button onclick="stopBubbles()">Stop Bubbles</button>
+        <div id="status"></div>
+    </div>
+
+    <script src="js/imageConfig.js"></script>
+    <script src="js/photoBubbles.js"></script>
+    
+    <script>
+        let bubbleInstance = null;
+        const status = document.getElementById('status');
+
+        function updateStatus(message) {
+            status.innerHTML += '<br>' + message;
+            console.log(message);
+        }
+
+        function testImageLoading() {
+            updateStatus('Testing image loading...');
+            
+            // Test if imageConfig is loaded
+            if (window.imageConfig) {
+                updateStatus('✓ imageConfig loaded with ' + window.imageConfig.floating.length + ' images');
+                
+                // Test loading first image
+                const testImg = new Image();
+                testImg.onload = () => updateStatus('✓ First image loads successfully');
+                testImg.onerror = () => updateStatus('✗ First image failed to load');
+                testImg.src = window.imageConfig.floating[0];
+            } else {
+                updateStatus('✗ imageConfig not loaded');
+            }
+        }
+
+        function testSingleBubble() {
+            updateStatus('Creating single test bubble...');
+            
+            if (!bubbleInstance) {
+                bubbleInstance = new PhotoBubbles();
+            }
+            
+            // Manually create one bubble
+            bubbleInstance.createBubble();
+        }
+
+        function startBubbles() {
+            updateStatus('Starting bubble animation...');
+            
+            if (!bubbleInstance) {
+                bubbleInstance = new PhotoBubbles();
+            } else {
+                bubbleInstance.resume();
+            }
+        }
+
+        function stopBubbles() {
+            updateStatus('Stopping bubble animation...');
+            
+            if (bubbleInstance) {
+                bubbleInstance.stop();
+            }
+        }
+
+        // Auto-test on load
+        window.addEventListener('load', () => {
+            updateStatus('Page loaded, running tests...');
+            testImageLoading();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Bubble Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #000;
+            overflow: hidden;
+        }
+        .test-bubble {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: url('dropbox/tooch-press.jpg') center/cover;
+            border: 3px solid #ff0000;
+            z-index: 1000;
+            opacity: 1;
+        }
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="createTestBubble()">Create Test Bubble</button>
+        <button onclick="clearBubbles()">Clear All</button>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            document.getElementById('log').innerHTML += '<br>' + message;
+            console.log(message);
+        }
+
+        function createTestBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'test-bubble';
+            bubble.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            bubble.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+            
+            document.body.appendChild(bubble);
+            log('Created test bubble at ' + bubble.style.left + ', ' + bubble.style.top);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (bubble.parentNode) {
+                    bubble.remove();
+                    log('Removed test bubble');
+                }
+            }, 5000);
+        }
+
+        function clearBubbles() {
+            const bubbles = document.querySelectorAll('.test-bubble');
+            bubbles.forEach(b => b.remove());
+            log('Cleared ' + bubbles.length + ' bubbles');
+        }
+
+        // Test image loading
+        const testImg = new Image();
+        testImg.onload = () => log('✓ Test image loaded successfully');
+        testImg.onerror = () => log('✗ Test image failed to load');
+        testImg.src = 'dropbox/tooch-press.jpg';
+    </script>
+</body>
+</html>
