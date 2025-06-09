@@ -854,11 +854,77 @@
     <!-- Login Link (for artist) -->
     <div class="fixed bottom-4 right-4">
         <a href="login.html" class="text-xs opacity-50 hover:opacity-100">Artist Login</a>
-    </div>    <!-- Load scripts in proper order -->
-    <script src="js/musicConfig.js"></script>
+    </div>    <!-- Load scripts in proper order -->    <script src="js/musicConfig.js"></script>
     <script src="js/player.js"></script>
     <script src="js/sectionLock.js"></script>
     <script src="js/main.js"></script>
+      <!-- Fix for mobile menu button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create mobile menu elements if they don't exist
+            let mobileMenu = document.querySelector('.mobile-menu');
+            let overlay = document.querySelector('.mobile-menu-overlay');
+            
+            if (!mobileMenu) {
+                mobileMenu = document.createElement('div');
+                mobileMenu.className = 'mobile-menu';
+                mobileMenu.innerHTML = `
+                    <a href="#music">🎵 Music</a>
+                    <a href="#videos">🎬 Videos</a>
+                    <a href="#media">📸 Media</a>
+                    <a href="#merch">🛍️ Merch</a>
+                    <a href="#tour">🎤 Tour</a>
+                    <a href="#about">ℹ️ About</a>
+                    <a href="press-kit.html">📰 Press Kit</a>
+                    <a href="#contact">📧 Contact</a>
+                    <button class="close-menu">✕ Close</button>
+                `;
+                document.body.appendChild(mobileMenu);
+            }
+            
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'mobile-menu-overlay';
+                document.body.appendChild(overlay);
+            }
+            
+            // Ensure mobile menu button works
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+                });
+            }
+            
+            // Close menu when clicking overlay
+            overlay.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close menu when clicking close button
+            const closeButton = mobileMenu.querySelector('.close-menu');
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Close menu when clicking nav links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        });
+    </script>
     
     <!-- Custom music player script to match press-kit functionality -->
     <script>
