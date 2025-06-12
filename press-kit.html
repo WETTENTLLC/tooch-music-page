@@ -465,7 +465,6 @@
         }        .platform-btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 25px rgba(100, 149, 237, 0.4);
-            background: linear-gradient(135deg, #c44569, #6c5ce7);
         }        /* Video Section Styles */
         .video-section {
             backdrop-filter: blur(20px);
@@ -546,6 +545,33 @@
             color: #333;
             line-height: 1.4;
             opacity: 0.8;
+        }
+
+        .hidden-video {
+            display: none !important; /* Important to override other display styles if necessary */
+        }
+
+        .play-more-videos-btn {
+            display: block; /* Or inline-block if preferred */
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin: 20px auto; /* Center the button */
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(100, 149, 237, 0.2);
+            width: fit-content;
+        }
+
+        .play-more-videos-btn:hover {
+            background: linear-gradient(135deg, #c44569, #ff6b9d);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(100, 149, 237, 0.3);
         }
         
         /* Press Kit Tabs Styles */
@@ -1145,30 +1171,34 @@
         <div class="section">
             <h2 class="section-title">Performance Videos 🎭🔥</h2>
             <div class="video-grid">
-                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video-output-F932FE5A-CD13-41CE-9176-FB1A605F5A24-1.MOV')">
+                <!-- This video will be visible by default -->
+                <div class="video-thumbnail" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV')">
+                    <video src="dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
+                    <div class="play-overlay">▶️</div>
+                </div>
+                
+                <!-- These videos will be hidden initially and shown on button click -->
+                <div class="video-thumbnail hidden-video" onclick="openVideoModal('dropbox/video-output-F932FE5A-CD13-41CE-9176-FB1A605F5A24-1.MOV')">
                     <video src="dropbox/video-output-F932FE5A-CD13-41CE-9176-FB1A605F5A24-1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
                     <div class="play-overlay">▶️</div>
                 </div>
                 
-                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video-output-3379E644-CE11-41ED-9881-62D607C8E317-1.MOV')">
+                <div class="video-thumbnail hidden-video" onclick="openVideoModal('dropbox/video-output-3379E644-CE11-41ED-9881-62D607C8E317-1.MOV')">
                     <video src="dropbox/video-output-3379E644-CE11-41ED-9881-62D607C8E317-1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
                     <div class="play-overlay">▶️</div>
                 </div>
                 
-                <div class="video-thumbnail" onclick="openVideoModal('dropbox/video oct 14 2024, 11 50 14 pm.MOV')">
+                <div class="video-thumbnail hidden-video" onclick="openVideoModal('dropbox/video oct 14 2024, 11 50 14 pm.MOV')">
                     <video src="dropbox/video oct 14 2024, 11 50 14 pm.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
                     <div class="play-overlay">▶️</div>
                 </div>
                 
-                <div class="video-thumbnail" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-46-57_1.MOV')">
+                <div class="video-thumbnail hidden-video" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-46-57_1.MOV')">
                     <video src="dropbox/ScreenRecording_06-07-2025 00-46-57_1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
                     <div class="play-overlay">▶️</div>
                 </div>
-                  <div class="video-thumbnail" onclick="openVideoModal('dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV')">
-                    <video src="dropbox/ScreenRecording_06-07-2025 00-44-52_1.MOV" class="thumbnail-preview" muted loop preload="metadata"></video>
-                    <div class="play-overlay">▶️</div>
-                </div>
             </div>
+            <button id="playMoreVideosBtn" class="play-more-videos-btn">Play More ---></button>
         </div>
         
         <!-- Contact Section (Moved below Performance Videos) -->
@@ -1495,7 +1525,48 @@
                 closeImageModal();
                 closeVideoModal();
             }
-        });        // Video thumbnail functionality (keeping for any future video thumbnails)        document.addEventListener('DOMContentLoaded', () => {
+        });
+
+        // Read More for Bio Section
+        const bioTextContainer = document.getElementById('bioTextContainer');
+        const readMoreBioBtn = document.getElementById('readMoreBioBtn');
+
+        if (readMoreBioBtn && bioTextContainer) {
+            // Check if bio text is overflowing
+            if (bioTextContainer.scrollHeight > bioTextContainer.clientHeight) {
+                readMoreBioBtn.style.display = 'inline-block'; // Show button if overflowing
+            } else {
+                readMoreBioBtn.style.display = 'none'; // Hide if not overflowing
+            }
+
+            readMoreBioBtn.addEventListener('click', () => {
+                bioTextContainer.classList.toggle('expanded');
+                if (bioTextContainer.classList.contains('expanded')) {
+                    readMoreBioBtn.textContent = 'Read Less';
+                } else {
+                    readMoreBioBtn.textContent = 'Read More';
+                }
+            });
+        }
+
+        // Play More Videos Functionality
+        const playMoreVideosBtn = document.getElementById('playMoreVideosBtn');
+        const hiddenVideos = document.querySelectorAll('.video-grid .hidden-video');
+
+        if (playMoreVideosBtn && hiddenVideos.length > 0) {
+            playMoreVideosBtn.addEventListener('click', () => {
+                hiddenVideos.forEach(video => {
+                    video.classList.remove('hidden-video');
+                    // Optionally, add a class to trigger a smooth reveal animation
+                    video.style.display = 'block'; // Or your default display for video-thumbnail
+                });
+                playMoreVideosBtn.style.display = 'none'; // Hide the button after revealing videos
+            });
+        } else if (playMoreVideosBtn) {
+            playMoreVideosBtn.style.display = 'none'; // Hide if no videos to show
+        }
+
+        // Video thumbnail functionality (keeping for any future video thumbnails)        document.addEventListener('DOMContentLoaded', () => {
             const videoThumbnails = document.querySelectorAll('.video-thumbnail');
             videoThumbnails.forEach(thumbnail => {                // Track info elements update
                 const titleElement = document.querySelector('.track-title');
