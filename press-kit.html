@@ -826,6 +826,142 @@
             height: 100%;
             object-fit: contain;
         }
+
+        /* Mobile Optimizations for Press Kit */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr; /* Stack sections on mobile */
+                gap: 30px;
+            }
+
+            .artist-image-section {
+                padding: 20px; /* Reduce padding on mobile */
+                min-height: auto; /* Adjust min-height for mobile */
+            }
+
+            .artist-image {
+                height: auto; /* Allow height to adjust based on aspect ratio */
+                width: 100%; /* Make image responsive */
+                max-width: 400px; /* Optional: constrain max size on mobile */
+                aspect-ratio: 1 / 1; /* Ensure square aspect ratio */
+                object-fit: cover; /* Ensure image covers the area, might crop */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .bio-section {
+                padding: 20px; /* Reduce padding on mobile */
+            }
+
+            .title {
+                font-size: 2.8rem; /* Adjust title font size for mobile */
+            }
+
+            .subtitle {
+                font-size: 1.2rem; /* Adjust subtitle font size for mobile */
+            }
+
+            .section-title {
+                font-size: 2rem; /* Adjust section title font size for mobile */
+            }
+
+            .bio-text {
+                font-size: 1rem; /* Adjust bio text font size for mobile */
+                line-height: 1.7;
+                /* max-height adjustment for read more will be handled by its existing styles */
+            }
+            .bio-text.expanded {
+                max-height: 1500px; /* Ensure enough height for expanded bio on mobile */
+            }
+
+
+            .highlights {
+                grid-template-columns: 1fr; /* Stack highlight cards on mobile */
+                gap: 20px;
+            }
+
+            .highlight-card {
+                padding: 25px; /* Adjust padding for highlight cards */
+            }
+
+            .highlight-title {
+                font-size: 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr; /* Stack contact cards on mobile */
+            }
+
+            .contact-card {
+                padding: 20px;
+            }
+            
+            .music-section, .contact-section {
+                padding: 20px;
+            }
+
+            .lollipop-player {
+                width: 220px; /* Slightly smaller player on mobile */
+                height: 220px;
+            }
+
+            .lollipop-center {
+                width: 140px;
+                height: 140px;
+            }
+
+            .playlist {
+                padding: 0 10px; /* Add some horizontal padding for playlist on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .press-kit-container {
+                padding: 20px 10px; /* Further reduce padding on very small screens */
+            }
+
+            .header {
+                padding: 25px;
+                margin-bottom: 30px;
+            }
+
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .artist-image {
+                 max-width: 100%; /* Allow full width if needed on small screens */
+                 /* aspect-ratio: 1 / 1; is inherited */
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .bio-text {
+                font-size: 0.95rem;
+            }
+            .read-more-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .highlight-card {
+                padding: 20px;
+            }
+            .highlight-title {
+                font-size: 1.3rem;
+            }
+            .highlight-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* End of Mobile Optimizations */
     </style>
 </head>
 <body>
@@ -1070,18 +1206,21 @@
         </div>
     </div>    <script>
         // Simple music player functionality for press kit
-        class PressKitMusicPlayer {            constructor() {                this.tracks = [
+        class PressKitMusicPlayer {            constructor() {
+                this.tracks = [
                     { 
                         title: "PRESS", 
                         artist: "Tooch Magooch", 
                         duration: "3:30",
-                        src: "dropbox/PRESS MASTER .mp3"
+                        src: "dropbox/PRESS MASTER .mp3",
+                        startTime: 21 // Start "PRESS" at 0:21
                     },
                     { 
                         title: "Munyunn", 
                         artist: "Tooch Magooch", 
-                        duration: "3:45",
-                        src: "dropbox/ytmp3free.cc_tooch-magooch-munyunn-official-music-video-youtubemp3free.org.mp3"
+                        duration: "3:45", // This might need an update if the actual duration is different
+                        src: "dropbox/Munyunn Ft Mozzy M3.m4a",
+                        startTime: 18 // Start "Munyunn" at 0:18
                     }
                 ];
                 this.currentTrack = 0; // Ensure we start with the first track (PRESS)
@@ -1098,7 +1237,9 @@
                 this.updateTrackInfo();
             }            createAudioElement() {
                 this.audio = new Audio();
-                this.audio.src = this.tracks[0].src; // Explicitly use the first track (PRESS)
+                // Load the first track by default, respecting its start time if specified
+                const firstTrack = this.tracks[0];
+                this.audio.src = firstTrack.src; 
                 this.audio.preload = 'metadata';
                 
                 // Show user interaction notice
@@ -1178,10 +1319,12 @@
                 if (this.isPlaying) {
                     this.audio.pause();
                     this.isPlaying = false;
-                } else {                    // Set the current time to 21 seconds if it's the PRESS track (first track)
-                    if (this.currentTrack === 0 && this.currentTime === 0) {
-                        this.audio.currentTime = 21;
-                        this.currentTime = 21;
+                } else {
+                    // Set the current time if it's the beginning of the track and startTime is defined
+                    const currentTrackData = this.tracks[this.currentTrack];
+                    if (this.audio.currentTime < 1 && currentTrackData.startTime) { // Check if near the beginning
+                        this.audio.currentTime = currentTrackData.startTime;
+                        this.currentTime = currentTrackData.startTime;
                     }
                     
                     const playPromise = this.audio.play();
@@ -1205,22 +1348,31 @@
                 if (!this.audio) return;
                 
                 this.currentTrack = index;
-                this.audio.src = this.tracks[this.currentTrack].src;
-                this.audio.currentTime = 0;
-                this.currentTime = 0;
+                const trackData = this.tracks[this.currentTrack];
+                this.audio.src = trackData.src;
                 
-                // If it's the PRESS track (index 0), set start time to 22 seconds
-                if (index === 0) {                    this.audio.currentTime = 21;
-                    this.currentTime = 21;
+                // Set start time if defined for the track
+                if (trackData.startTime) {
+                    this.audio.currentTime = trackData.startTime;
+                    this.currentTime = trackData.startTime;
+                } else {
+                    this.audio.currentTime = 0;
+                    this.currentTime = 0;
                 }
                 
                 this.updateTrackInfo();
-                this.updateProgressBar(index === 0 ? (22 / this.audio.duration * 100) : 0);
+                // Update progress bar based on start time or 0
+                this.updateProgressBar(trackData.startTime ? (trackData.startTime / this.audio.duration * 100) : 0);
                 
                 if (this.isPlaying) {
                     this.audio.play().catch((error) => {
                         console.error('Play failed:', error);
                     });
+                } else {
+                    // If not already playing, we might want to auto-play or just load
+                    // For now, it just loads. User needs to press play.
+                    // If auto-play is desired after selecting a track:
+                    // this.togglePlayPause(); 
                 }
             }
 
