@@ -155,7 +155,9 @@
             flex-direction: column;
             justify-content: center;
             min-height: 600px;
-        }        .artist-image {
+        }
+
+        .artist-image {
             width: 100%;
             height: 500px;
             object-fit: cover;
@@ -164,23 +166,6 @@
             box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
             margin-bottom: 20px;
             position: relative;
-        }
-
-        /* Mobile image optimization */
-        @media (max-width: 768px) {
-            .artist-image {
-                height: 350px;
-                object-position: center top;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .artist-image {
-                height: 280px;
-                object-position: center;
-                border-radius: 15px;
-                border: 3px solid #ff6b9d;
-            }
         }
 
         .artist-image::before {
@@ -226,99 +211,54 @@
             color: #333;
             opacity: 0.9;
             margin-bottom: 20px;
+            /* Initial collapsed state */
+            max-height: 100px; /* Adjust as needed for a few lines */
+            overflow: hidden;
+            position: relative; /* For the fade-out effect */
+            transition: max-height 0.5s ease-out;
         }
 
-        .highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }        .highlight-card {
-            backdrop-filter: blur(20px);
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.25) 0%,
-                rgba(255, 182, 193, 0.3) 50%,
-                rgba(255, 255, 255, 0.25) 100%
-            );
-            border-radius: 30px;
-            padding: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 15px 35px rgba(100, 149, 237, 0.3);
-            text-align: center;
-            transition: all 0.3s ease;
-        }.highlight-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(100, 149, 237, 0.3);
-            background: rgba(255, 255, 255, 0.15);
+        .bio-text.expanded {
+            max-height: 1000px; /* Adjust to a large enough value */
+            overflow: visible;
         }
 
-        .highlight-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
+        .bio-text::after { /* Fade-out effect for collapsed text */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.25) 70%, rgba(255, 182, 193, 0.3) 100%);
+            pointer-events: none; /* Allows clicking through the gradient */
+            transition: opacity 0.3s ease-out;
         }
 
-        .highlight-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #ff6b9d;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
-        }        .highlight-text {
-            font-size: 1rem;
-            color: #333;
-            opacity: 0.9;
-            line-height: 1.6;
-        }        .contact-section {
-            backdrop-filter: blur(20px);
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.25) 0%,
-                rgba(255, 182, 193, 0.3) 50%,
-                rgba(255, 255, 255, 0.25) 100%
-            );
-            border-radius: 30px;
-            padding: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 15px 35px rgba(100, 149, 237, 0.3);
-            text-align: center;
+        .bio-text.expanded::after {
+            opacity: 0;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }        .contact-card {
-            backdrop-filter: blur(20px);
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.15) 0%,
-                rgba(255, 182, 193, 0.2) 50%,
-                rgba(255, 255, 255, 0.15) 100%
-            );
+        .read-more-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 10px 20px;
             border-radius: 20px;
-            padding: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 25px rgba(100, 149, 237, 0.2);
-            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
             cursor: pointer;
-        }.contact-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 30px rgba(100, 149, 237, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(100, 149, 237, 0.2);
         }
 
-        .contact-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
-            color: #ff6b9d;
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px rgba(255, 107, 157, 0.5);
-        }        .contact-info {
-            font-size: 1rem;
-            color: #333;
-            opacity: 0.9;
-        }        /* Music Player Styles */
-        .music-section {
+        .read-more-btn:hover {
+            background: linear-gradient(135deg, #c44569, #ff6b9d);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(100, 149, 237, 0.3);
+        }        .music-section {
             backdrop-filter: blur(20px);
             background: linear-gradient(135deg, 
                 rgba(255, 255, 255, 0.25) 0%,
@@ -834,177 +774,18 @@
                 transform: translateY(-15px) rotate(180deg);
                 opacity: 1;
             }
-        }        /* Responsive adjustments for the larger logo */
+        }
+
+        /* Responsive adjustments for the larger logo */
         @media (max-width: 768px) {
             .main-logo {
                 max-width: 350px;
-            }
-            
-            /* Mobile Layout Optimizations */
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .artist-image-section {
-                min-height: auto;
-                padding: 30px 20px;
-            }
-            
-            .artist-image {
-                height: 400px;
-                width: 100%;
-                object-fit: cover;
-            }
-            
-            .bio-section {
-                padding: 30px 20px;
-            }
-            
-            .bio-text {
-                font-size: 1rem;
-                line-height: 1.6;
-                margin-bottom: 15px;
-            }
-            
-            .highlights {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin: 30px 0;
-            }
-            
-            .highlight-card {
-                padding: 25px 20px;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .title {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .header {
-                padding: 30px 20px;
-                margin-bottom: 30px;
             }
         }
 
         @media (max-width: 480px) {
             .main-logo {
                 max-width: 280px;
-            }
-            
-            /* Small Mobile Optimizations */
-            .press-kit-container {
-                padding: 20px 10px;
-            }
-            
-            .title {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 20px;
-            }
-            
-            .artist-image {
-                height: 300px;
-            }
-            
-            .artist-image-section,
-            .bio-section,
-            .contact-section {
-                padding: 20px 15px;
-            }
-            
-            .highlight-card {
-                padding: 20px 15px;
-            }
-            
-            .bio-text {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                margin-bottom: 12px;
-            }
-            
-            .highlight-icon {
-                font-size: 2.5rem;
-                margin-bottom: 10px;
-            }
-            
-            .highlight-title {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-            }
-            
-            .highlight-text {
-                font-size: 0.9rem;
-                line-height: 1.5;
-            }
-            
-            .contact-title {
-                font-size: 1.3rem;
-            }
-            
-            .contact-info {
-                font-size: 0.9rem;
-            }
-              /* Reduce vertical spacing on small screens */
-            .header {
-                padding: 20px 15px;
-                margin-bottom: 20px;
-            }
-            
-            .main-content {
-                gap: 20px;
-            }
-            
-            .highlights {
-                margin: 20px 0;
-                gap: 15px;
-            }
-            
-            /* Mobile bio optimization */
-            .bio-section h4.bio-text {
-                background: rgba(255, 107, 157, 0.1);
-                padding: 10px 15px;
-                border-radius: 8px;
-                margin: 15px 0 10px 0;
-                border-left: 3px solid #ff6b9d;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-            
-            .bio-section h4.bio-text:hover {
-                background: rgba(255, 107, 157, 0.15);
-            }
-            
-            /* Make bio sections more compact on mobile */
-            .bio-section .bio-text + .bio-text {
-                margin-top: 10px;
-            }
-            
-            /* Tabs responsive */
-            .press-kit-tabs {
-                flex-wrap: wrap;
-                gap: 10px !important;
-            }
-            
-            .tab-link {
-                padding: 6px 15px !important;
-                font-size: 0.9rem !important;
             }
         }
 
@@ -1097,40 +878,13 @@
                     <img src="dropbox/tooch5.jpg" alt="Tooch Magooch - Additional Photo" class="artist-image" style="width: 100%; max-height: 300px; object-fit: cover;">
                 </div>
             </div><div class="bio-section">
-                <h2 class="section-title">About Tooch Magooch 🎤</h2>
-                <h3 class="bio-text" style="font-size: 1.3rem; font-weight: 600; color: #ff6b9d; margin-bottom: 15px;">The Unstoppable Force of Sacramento Hip-Hop</h3>
-                <p class="bio-text">
-                    Tooch MaGooch isn't just an artist—she's a seismic shift in the West Coast hip-hop landscape. Hailing from the gritty streets of Sacramento, this lyrical powerhouse has erupted onto the scene with an unapologetic flow, entrepreneurial hustle, and a signature blend of Bay Area swagger and Sac-Town authenticity. In just months, she's transformed from a local phenomenon into a rising national icon, commanding attention with every bar.
-                </p>
-                
-                <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">The Sound & The Vision</h4>
-                <p class="bio-text">
-                    With production that hits like a freight train and lyrics that cut through the noise, Tooch's music is a raw celebration of independence, hustle, and feminine power. Her sound fuses trunk-rattling 808s with razor-sharp wordplay, drawing inspiration from legends like Tupac and Cardi B while carving a lane entirely her own. Tracks like the anthemic <strong>"Munyunn"</strong> (2023/2025) and the defiant "1942" (2024) have become street hymns, streaming in the millions and dominating local airwaves. Her latest single—"PRESS"—showcases an artist refining her craft while staying rooted in the unvarnished truths of her journey.
-                </p>
-                
-                <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">From Sac-Town to the Main Stage</h4>
-                <p class="bio-text">
-                    Born and raised in Sacramento, Tooch's rise has been meteoric. Her debut project "Munyunn" wasn't just a release—it was a declaration. As The Source noted, she arrived with "grit, determination, and an undying hunger for success," quickly amassing a loyal following through sheer lyrical prowess and relentless work ethic. Despite being a newcomer, she's already collaborated with heavyweights like Mozzy ("Mine"), DaBoii ("Lemme See Something Remix"), and Rayven Justice ("1942"), proving her versatility without sacrificing her vision.
-                </p>
-                
-                <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">More Than Music: The Brand</h4>
-                <p class="bio-text">
-                    Tooch is a holistic creative force. She directs her own music videos, ensuring every visual—from the choreography to the symbolism—aligns with her message of empowerment and authenticity. Her aesthetic is bold, unfiltered, and unmistakably her: a reflection of Sacramento's resilience blended with global ambition. Off-mic, she's building an empire, engaging fans with unmatched transparency via Instagram (@tooch_magooch) and staying independent while eyeing strategic partnerships to amplify her reach.
-                </p>
-                
-                <h4 class="bio-text" style="font-size: 1.2rem; font-weight: 600; color: #c44569; margin-bottom: 10px; margin-top: 25px;">The Future Is Now</h4>
-                <p class="bio-text">
-                    With 2025 already marking major releases (including the single "PRESS" and the "Emotionally Disfunctional Night Shift" project), Tooch is poised for global domination. Her ambitions are clear: a world tour, chart-topping anthems, and a legacy that inspires the next generation. As she declares in "Munyunn":
-                </p>
-                <p class="bio-text" style="font-style: italic; color: #ff6b9d; font-weight: 600; text-align: center; padding: 15px; border-left: 4px solid #ff6b9d; margin: 20px 0; background: rgba(255, 107, 157, 0.1);">
-                    "Get the bag different, I pull up with bad bitches / Get out of line, we do a lot of ass whippin'"
-                </p>
-                <p class="bio-text" style="font-weight: 600; color: #ff6b9d;">
-                    This is more than music—it's a movement.
-                </p>
-                <p class="bio-text" style="font-weight: 600; font-size: 1.1rem; color: #c44569; margin-top: 20px;">
-                    Tooch MaGooch is Sacramento's brightest star, and she's just getting started.
-                </p>
+                <h2 class="section-title">About Tooch Magooch</h2>
+                <div id="bioTextContainer" class="bio-text">
+                    <p>Meet Tooch Magooch, the vibrant heart of the indie music scene, whose journey began in the eclectic and sun-drenched landscapes of Southern California. With a sound as unique as her name, Tooch masterfully blends dreamy pop, soulful R&B, and a touch of psychedelic rock, creating an auditory experience that is both captivating and refreshingly original. Her music is a rich tapestry woven with lyrical storytelling, ethereal melodies, and beats that make you want to move, reflecting a deep connection to her roots and a forward-thinking artistic vision.</p>
+                    <p>From a young age, Tooch was immersed in a world of music, drawing inspiration from a diverse range of artists and genres. This early exposure ignited a passion that led her to hone her skills as a multi-instrumentalist, vocalist, and songwriter. Her dedication to her craft is evident in every note she plays and every lyric she pens, each piece a carefully constructed reflection of her innermost thoughts and experiences. Tooch's live performances are nothing short of magical, characterized by an infectious energy, stunning visuals, and an intimate connection with her audience. She transforms stages into immersive wonderlands, where fans are invited to lose themselves in the music and the moment.</p>
+                    <p>Beyond her captivating sound, Tooch Magooch is an artist with a message. Her lyrics often explore themes of self-discovery, empowerment, love, and the complexities of the human experience, resonating deeply with listeners from all walks of life. She is a storyteller at heart, using her music as a canvas to paint vivid pictures and evoke powerful emotions. As she continues to evolve and push creative boundaries, Tooch is not just making music; she's creating a movement. A movement that celebrates individuality, embraces vulnerability, and encourages everyone to find their own unique rhythm in the symphony of life. Keep an eye on Tooch Magooch – she's an artist destined to leave an indelible mark on the music world.</p>
+                </div>
+                <button id="readMoreBioBtn" class="read-more-btn">Read More</button>
             </div>
         </div>        <div class="highlights">
             <div class="highlight-card">
@@ -1606,7 +1360,8 @@
                     }
                 }, 1500); // Small delay to ensure everything is loaded
             });
-              // Tab link hover effect
+            
+            // Tab link hover effect
             const tabLinks = document.querySelectorAll('.tab-link');
             tabLinks.forEach(tab => {
                 tab.addEventListener('mouseenter', () => {
@@ -1629,35 +1384,6 @@
                     }, 1000);
                 });
             });
-            
-            // Mobile bio section optimization
-            function optimizeForMobile() {
-                if (window.innerWidth <= 768) {
-                    // Add expand/collapse functionality for bio sections on mobile
-                    const bioHeaders = document.querySelectorAll('.bio-section h4.bio-text');
-                    bioHeaders.forEach(header => {
-                        header.addEventListener('click', function() {
-                            const nextP = this.nextElementSibling;
-                            if (nextP && nextP.tagName === 'P') {
-                                const isVisible = nextP.style.display !== 'none';
-                                nextP.style.display = isVisible ? 'none' : 'block';
-                                this.innerHTML = this.innerHTML.replace(/[▼▲]/, '') + (isVisible ? ' ▼' : ' ▲');
-                            }
-                        });
-                        
-                        // Add initial arrow indicator
-                        if (!header.innerHTML.includes('▼')) {
-                            header.innerHTML += ' ▼';
-                        }
-                    });
-                }
-            }
-            
-            // Initialize mobile optimizations
-            optimizeForMobile();
-            
-            // Re-optimize on window resize
-            window.addEventListener('resize', optimizeForMobile);
-    </script>
-</body>
+        </script>
+    </body>
 </html>
