@@ -483,6 +483,24 @@ mainStyles.textContent = `
             transform: scale(1) translateY(0);
         }
     }
+
+    .bio-text {
+        max-height: 4.5rem; /* Adjust based on your design */
+        overflow: hidden;
+        transition: max-height 0.6s ease, padding 0.6s ease;
+    }
+    
+    .bio-text.expanded {
+        max-height: 20rem; /* Or any large value to accommodate expanded content */
+    }
+    
+    .gallery-item {
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .hidden-gallery-image {
+        display: none !important;
+    }
 `;
 document.head.appendChild(mainStyles);
 
@@ -496,3 +514,58 @@ window.toochMusicApp = toochMusicApp;
 // Expose utility functions globally
 window.showNotification = (message, type) => toochMusicApp.showNotification(message, type);
 window.createModal = (title, content) => toochMusicApp.createModal(title, content);
+
+// Read More Bio for About Section (Main Site)
+const readMoreBioButtonMain = document.getElementById('readMoreBioAbout');
+if (readMoreBioButtonMain) {
+    const bioTextElementsMain = document.querySelectorAll('#about .bio-text');
+    // Initially, only the first bio-text should be fully visible, others partially or hidden by max-height
+    // The button toggles all of them.
+    readMoreBioButtonMain.addEventListener('click', function() {
+        const btn = this;
+        const isExpanded = btn.textContent === 'Read Less...';
+
+        bioTextElementsMain.forEach(function(bioText) {
+            bioText.classList.toggle('expanded', !isExpanded);
+        });
+
+        btn.textContent = isExpanded ? 'Read More...' : 'Read Less...';
+    });
+}
+
+// See More for Gallery (Main Site)
+const seeMoreGalleryButtonMain = document.getElementById('seeMoreGalleryBtnMain');
+if (seeMoreGalleryButtonMain) {
+    const hiddenImagesMain = document.querySelectorAll('#media .gallery-item.hidden-gallery-image');
+    
+    seeMoreGalleryButtonMain.addEventListener('click', function() {
+        let allWereRevealedThisClick = true;
+        hiddenImagesMain.forEach(function(imgContainer) {
+            // Check if it's currently hidden by the class
+            if (imgContainer.classList.contains('hidden-gallery-image')) {
+                imgContainer.classList.remove('hidden-gallery-image');
+                // If we want to reveal one by one, we'd break here after one reveal.
+                // For revealing all remaining, we continue.
+            } else {
+                // If an image was already visible (class removed previously), it doesn't count for this click's reveal action.
+                allWereRevealedThisClick = false;
+            }
+        });
+
+        // After attempting to reveal, check if any are *still* hidden by the class
+        let anyStillHidden = false;
+        hiddenImagesMain.forEach(item => {
+            if(item.classList.contains('hidden-gallery-image')) {
+                anyStillHidden = true;
+            }
+        });
+
+        if (!anyStillHidden) {
+            this.textContent = 'Showing All Images';
+            this.disabled = true;
+        } else {
+            this.textContent = 'See More ---->'; // Or update based on how many are left, if desired
+            this.disabled = false; // Ensure it's enabled if there are more to show
+        }
+    });
+}

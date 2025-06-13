@@ -3,9 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooch Magooch - Press Kit 💖</title>
+    <title>Tooch Magooch | Ms Munyunn - #1 Female Rap Artist | Press Kit</title>
+    <meta name="description" content="Official press kit for Tooch Magooch (Ms Munyunn), Sacramento's #1 female rap artist. Download high-res images, music, videos, and learn more about her chart-topping career.">
+    <meta name="keywords" content="Tooch Magooch, Ms Munyunn, female rap artist, Sacramento rapper, rap music, Munyunn, PRESS, West Coast hip hop, women in rap, press kit, music videos, tour dates, official press kit, BDS radio, charting artist, Mozzy, DaBoii, Rayven Justice, The Source, independent artist, legal music ownership, top female rapper, 2025 press kit">
+    <meta name="author" content="Tooch Magooch">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toochmagooch.com/press-kit.html">
+    <meta property="og:title" content="Tooch Magooch | Ms Munyunn - #1 Female Rap Artist | Press Kit">
+    <meta property="og:description" content="Official press kit for Tooch Magooch (Ms Munyunn), Sacramento's #1 female rap artist. Download high-res images, music, videos, and more.">
+    <meta property="og:image" content="https://toochmagooch.com/dropbox/tooch-header.jpg">
+    <meta property="og:site_name" content="Tooch Magooch">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@toochmagooch">
+    <meta name="twitter:creator" content="@toochmagooch">
+    <meta name="twitter:title" content="Tooch Magooch | Ms Munyunn - #1 Female Rap Artist | Press Kit">
+    <meta name="twitter:description" content="Official press kit for Tooch Magooch (Ms Munyunn), Sacramento's #1 female rap artist. Download high-res images, music, videos, and more.">
+    <meta name="twitter:image" content="https://toochmagooch.com/dropbox/tooch-header.jpg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Tooch Magooch",
+      "alternateName": "Ms Munyunn",
+      "url": "https://toochmagooch.com/press-kit.html",
+      "image": "https://toochmagooch.com/dropbox/tooch-header.jpg",
+      "description": "Official press kit for Tooch Magooch (Ms Munyunn), Sacramento's #1 female rap artist. Download high-res images, music, videos, and learn more about her chart-topping career.",
+      "genre": ["Rap", "Hip Hop", "West Coast"],
+      "member": [{
+        "@type": "Person",
+        "name": "Tooch Magooch",
+        "sameAs": [
+          "https://instagram.com/tooch_magooch",
+          "https://twitter.com/toochmagooch"
+        ]
+      }],
+      "sameAs": [
+        "https://instagram.com/tooch_magooch",
+        "https://twitter.com/toochmagooch"
+      ],
+      "album": [
+        {
+          "@type": "MusicAlbum",
+          "name": "Singles",
+          "albumReleaseType": "Single",
+          "byArtist": { "@type": "MusicGroup", "name": "Tooch Magooch" },
+          "track": [
+            {
+              "@type": "MusicRecording",
+              "name": "PRESS",
+              "url": "https://toochmagooch.com/press-kit.html",
+              "duration": "PT3M30S"
+            },
+            {
+              "@type": "MusicRecording",
+              "name": "Munyunn",
+              "url": "https://toochmagooch.com/press-kit.html",
+              "duration": "PT3M45S"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Tooch Magooch Official Website",
+      "url": "https://toochmagooch.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://toochmagooch.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tooch Magooch",
+      "alternateName": "Ms Munyunn",
+      "url": "https://toochmagooch.com/",
+      "logo": "https://toochmagooch.com/dropbox/tooch logo.png",
+      "sameAs": [
+        "https://instagram.com/tooch_magooch",
+        "https://twitter.com/toochmagooch"
+      ]
+    }
+    </script>
+
+    <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Styles -->
     <style>
         * {
             margin: 0;
@@ -1609,77 +1710,13 @@
         // Play More Videos Functionality
         const playMoreVideosBtn = document.getElementById('playMoreVideosBtn');
         const hiddenVideos = document.querySelectorAll('.video-grid .hidden-video');
-
-        if (playMoreVideosBtn && hiddenVideos.length > 0) {
-            playMoreVideosBtn.addEventListener('click', () => {
-                hiddenVideos.forEach(video => {
-                    video.classList.remove('hidden-video');
-                    // Optionally, add a class to trigger a smooth reveal animation
-                    video.style.display = 'block'; // Or your default display for video-thumbnail
-                });
-                playMoreVideosBtn.style.display = 'none'; // Hide the button after revealing videos
+        playMoreVideosBtn.addEventListener('click', () => {
+            hiddenVideos.forEach(video => {
+                video.classList.remove('hidden-video');
+                video.style.display = 'block'; // Show video thumbnail
             });
-        } else if (playMoreVideosBtn) {
-            playMoreVideosBtn.style.display = 'none'; // Hide if no videos to show
-        }
-
-        // See More Gallery Functionality
-        const seeMoreGalleryBtn = document.getElementById('seeMoreGalleryBtn');
-        const hiddenGalleryImages = document.querySelectorAll('.video-grid .hidden-gallery-image');
-
-        if (seeMoreGalleryBtn && hiddenGalleryImages.length > 0) {
-            seeMoreGalleryBtn.addEventListener('click', () => {
-                hiddenGalleryImages.forEach(image => {
-                    image.classList.remove('hidden-gallery-image');
-                    image.style.display = 'block'; // Or your default display for video-thumbnail
-                });
-                seeMoreGalleryBtn.style.display = 'none'; // Hide the button after revealing images
-            });
-        } else if (seeMoreGalleryBtn) {
-            seeMoreGalleryBtn.style.display = 'none'; // Hide if no images to show
-        }
-
-        // Video thumbnail functionality (keeping for any future video thumbnails)        document.addEventListener('DOMContentLoaded', () => {
-            const videoThumbnails = document.querySelectorAll('.video-thumbnail');
-            videoThumbnails.forEach(thumbnail => {                // Track info elements update
-                const titleElement = document.querySelector('.track-title');
-                const artistElement = document.querySelector('.track-artist');
-
-                if (titleElement) titleElement.textContent = "PRESS";
-                if (artistElement) artistElement.textContent = "Tooch Magooch";
-
-                // Auto-play the first track
-                setTimeout(() => {
-                    const playButton = document.querySelector('.play-button');
-                    if (playButton) {
-                        playButton.click();
-                    }
-                }, 1500); // Small delay to ensure everything is loaded
-            });
-            
-            // Tab link hover effect
-            const tabLinks = document.querySelectorAll('.tab-link');
-            tabLinks.forEach(tab => {
-                tab.addEventListener('mouseenter', () => {
-                    // Add sparkle effect on hover
-                    const sparkle = document.createElement('span');
-                    sparkle.innerHTML = '✨';
-                    sparkle.style.position = 'absolute';
-                    sparkle.style.top = Math.random() * 100 + '%';
-                    sparkle.style.left = Math.random() * 100 + '%';
-                    sparkle.style.fontSize = '12px';
-                    sparkle.style.zIndex = '3';
-                    sparkle.style.animation = 'sparkle 1s ease-in-out forwards';
-                    tab.appendChild(sparkle);
-                    
-                    // Remove sparkle after animation completes
-                    setTimeout(() => {
-                        if (sparkle && sparkle.parentNode === tab) {
-                            tab.removeChild(sparkle);
-                        }
-                    }, 1000);
-                });
-            });
-        </script>
-    </body>
+            playMoreVideosBtn.style.display = 'none'; // Hide the button after clicking
+        });
+    </script>
+</body>
 </html>
