@@ -573,6 +573,33 @@
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 8px 20px rgba(100, 149, 237, 0.3);
         }
+
+        .hidden-gallery-image {
+            display: none !important;
+        }
+
+        .see-more-gallery-btn {
+            display: block;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin: 20px auto; /* Center the button */
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(100, 149, 237, 0.2);
+            width: fit-content;
+        }
+
+        .see-more-gallery-btn:hover {
+            background: linear-gradient(135deg, #c44569, #ff6b9d);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(100, 149, 237, 0.3);
+        }
         
         /* Press Kit Tabs Styles */
         .press-kit-tabs {
@@ -1010,7 +1037,7 @@
     <div class="press-kit-container">        <header class="header">
             <!-- Logo in Header - Large with Rainbow Animation -->
             <div class="logo-container" style="text-align: center; margin-bottom: 10px; position: relative;">                <img src="dropbox/tooch logo.png" alt="Tooch Magooch Logo" class="main-logo">
-                <!-- Floating sparkles and dollar signs around logo -->
+                <!-- Floating sparkles around logo -->
                 <span class="floating-sparkle">✨</span>
                 <span class="floating-sparkle">⭐</span>
                 <span class="floating-sparkle">✨</span>
@@ -1154,7 +1181,40 @@
                 <div class="video-thumbnail" onclick="openImageModal('dropbox/tooch-gallery-4.jpg')">
                     <img src="dropbox/tooch-gallery-4.jpg" alt="Tooch Magooch Professional Photo">
                 </div>
+
+                <!-- Added Picture Gallery Images (initially hidden) -->
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A0349-Edit.HEIC')">
+                    <img src="dropbox/Picture Gallery/4Q1A0349-Edit.HEIC" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A3972 copy.JPEG')">
+                    <img src="dropbox/Picture Gallery/4Q1A3972 copy.JPEG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A3985 copy.JPEG')">
+                    <img src="dropbox/Picture Gallery/4Q1A3985 copy.JPEG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A4013 copy.JPEG')">
+                    <img src="dropbox/Picture Gallery/4Q1A4013 copy.JPEG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A4174.HEIC')">
+                    <img src="dropbox/Picture Gallery/4Q1A4174.HEIC" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A4209.HEIC')">
+                    <img src="dropbox/Picture Gallery/4Q1A4209.HEIC" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A4993.JPEG')">
+                    <img src="dropbox/Picture Gallery/4Q1A4993.JPEG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/4Q1A7649 copy.JPEG')">
+                    <img src="dropbox/Picture Gallery/4Q1A7649 copy.JPEG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/aJsGF86X.JPG')">
+                    <img src="dropbox/Picture Gallery/aJsGF86X.JPG" alt="Tooch Magooch Gallery Photo">
+                </div>
+                <div class="video-thumbnail hidden-gallery-image" onclick="openImageModal('dropbox/Picture Gallery/REJv5HKQ.JPG')">
+                    <img src="dropbox/Picture Gallery/REJv5HKQ.JPG" alt="Tooch Magooch Gallery Photo">
+                </div>
             </div>
+            <button id="seeMoreGalleryBtn" class="see-more-gallery-btn">See More ----></button>
         </div>
 
         <!-- Image Modal -->
@@ -1561,6 +1621,22 @@
             });
         } else if (playMoreVideosBtn) {
             playMoreVideosBtn.style.display = 'none'; // Hide if no videos to show
+        }
+
+        // See More Gallery Functionality
+        const seeMoreGalleryBtn = document.getElementById('seeMoreGalleryBtn');
+        const hiddenGalleryImages = document.querySelectorAll('.video-grid .hidden-gallery-image');
+
+        if (seeMoreGalleryBtn && hiddenGalleryImages.length > 0) {
+            seeMoreGalleryBtn.addEventListener('click', () => {
+                hiddenGalleryImages.forEach(image => {
+                    image.classList.remove('hidden-gallery-image');
+                    image.style.display = 'block'; // Or your default display for video-thumbnail
+                });
+                seeMoreGalleryBtn.style.display = 'none'; // Hide the button after revealing images
+            });
+        } else if (seeMoreGalleryBtn) {
+            seeMoreGalleryBtn.style.display = 'none'; // Hide if no images to show
         }
 
         // Video thumbnail functionality (keeping for any future video thumbnails)        document.addEventListener('DOMContentLoaded', () => {
