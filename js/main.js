@@ -22,8 +22,7 @@ class ToochMusicApp {
     initialize() {
         if (this.isInitialized) return;
 
-        console.log('Initializing Tooch Magooch Music App...');
-          // Initialize core components
+        console.log('Initializing Tooch Magooch Music App...');        // Initialize core components
         this.setupNavigation();
         this.setupScrollEffects();
         this.setupFormHandlers();
@@ -34,6 +33,7 @@ class ToochMusicApp {
         this.setupPerformanceOptimizations();
         this.setupVideoPlayer();
         this.setupGalleryFunctionality();
+        this.setupPreOrderForms();
         
         // Initialize external components
         this.initializeExternalComponents();
@@ -117,6 +117,9 @@ class ToochMusicApp {
                 this.handleNewsletterSignup();
             });
         });
+
+        // Add form handling for pre-order forms
+        this.setupPreOrderForms();
     }
 
     handleContactForm(form) {
@@ -176,9 +179,7 @@ class ToochMusicApp {
                 this.showNotification('Successfully subscribed! You\'ll be notified of updates.', 'success');
                 console.log('Newsletter signup:', email);
             }, 1000);
-        });    }
-
-    setupMobileMenu() {
+        });    }    setupMobileMenu() {
         const menuButton = document.getElementById('mobile-menu-btn');
         if (!menuButton) {
             console.warn('Mobile menu button not found');
@@ -222,23 +223,27 @@ class ToochMusicApp {
                 mobileNav.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                console.log('Mobile menu closed');
             } else {
                 mobileNav.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                console.log('Mobile menu opened');
             }
         };
         
-        // Menu button click
+        // Menu button click with debugging
         menuButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
+            console.log('Menu button clicked');
             toggleMenu();
         });
         
         // Close menu when clicking overlay
         overlay.addEventListener('click', (e) => {
             e.preventDefault();
+            console.log('Overlay clicked');
             toggleMenu();
         });
         
@@ -248,6 +253,7 @@ class ToochMusicApp {
             closeButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Close button clicked');
                 toggleMenu();
             });
         }
@@ -516,6 +522,25 @@ class ToochMusicApp {
             if (e.target === lightbox) {
                 closeLightbox();
             }
+        });
+    }
+
+    setupPreOrderForms() {
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                const select = form.querySelector('select');
+                const selection = select ? select.value : '';
+                
+                if (email && selection && selection !== 'Select Size' && selection !== 'Select Color' && selection !== 'Select Bundle') {
+                    alert(`Thank you for your pre-order! We'll contact you at ${email} when your ${selection} is available.`);
+                    form.reset();
+                } else {
+                    alert('Please fill in all fields to pre-order.');
+                }
+            });
         });
     }
 }
