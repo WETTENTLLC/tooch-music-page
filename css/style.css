@@ -361,70 +361,14 @@ body {
     border-radius: 15px;
 }
 
-/* Photo Bubbles Animation */
+/* Photo Bubbles Animation - DISABLED */
 .photo-bubble {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 5;
-    opacity: var(--bubble-opacity, 0.9);
-    animation: bubbleFloat 15s linear infinite;
-    transform: rotate(var(--bubble-rotation, 0deg));
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: none !important; /* Completely hide any bubbles that might be created */
 }
 
-.photo-bubble .bubble-image-container {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-}
+/* Photo Bubbles Animation - All styles removed/disabled */
 
-.photo-bubble .bubble-image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 50%);
-    z-index: 1;
-    pointer-events: none;
-    border-radius: 50%;
-}
-
-.photo-bubble img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
-}
-
-@keyframes bubbleFloat {
-    0% {
-        transform: translateY(10vh) scale(0.3) rotate(var(--bubble-rotation, 0deg));
-        opacity: 0;
-    }
-    15% {
-        opacity: var(--bubble-opacity, 0.9);
-        transform: translateY(5vh) scale(0.6) rotate(calc(var(--bubble-rotation, 0deg) + 30deg));
-    }
-    50% {
-        transform: translateY(-30vh) scale(1) rotate(calc(var(--bubble-rotation, 0deg) + 180deg));
-        opacity: var(--bubble-opacity, 0.9);
-    }
-    85% {
-        opacity: var(--bubble-opacity, 0.8);
-        transform: translateY(-70vh) scale(0.8) rotate(calc(var(--bubble-rotation, 0deg) + 330deg));
-    }
-    100% {
-        transform: translateY(-90vh) scale(0.5) rotate(calc(var(--bubble-rotation, 0deg) + 360deg));
-        opacity: 0;
-    }
-}
+/* bubbleFloat animation removed */
 
 /* Responsive adjustments for photo bubbles */
 @media (max-width: 768px) {

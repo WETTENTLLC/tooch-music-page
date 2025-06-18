@@ -1,8 +1,8 @@
-// Photo Bubbles Animation for Tooch Magooch Music Page
+// Photo Bubbles Animation for Tooch Magooch Music Page - Empty Gradient Bubbles
 class PhotoBubbles {
     constructor() {
         this.bubbles = [];
-        this.maxBubbles = 8; // Increased for more visual impact
+        this.maxBubbles = 8;
         this.isActive = true;
         this.bubbleInterval = null;
         this.sizes = [
@@ -10,8 +10,8 @@ class PhotoBubbles {
             { min: 80, max: 120 },  // Medium bubbles
             { min: 120, max: 180 }, // Large bubbles
             { min: 180, max: 220 }  // Extra large bubbles
-        ];        this.debugMode = true; // Debug mode flag - enabled for testing
-        this.usedImages = new Set(); // Track used images in debug mode
+        ];
+        this.debugMode = false;
         this.init();
     }
 
@@ -21,20 +21,22 @@ class PhotoBubbles {
         } else {
             this.start();
         }
-    }    start() {
+    }
+
+    start() {
         if (!this.isActive) return;
         
-        console.log('PhotoBubbles: Starting animation...');
+        console.log('PhotoBubbles: Starting gradient bubble animation...');
         
         // Detect device capabilities and adjust settings
         const deviceSettings = this.detectDevice();
         this.sizes = deviceSettings.sizes;
         
-        console.log('PhotoBubbles: Device settings:', deviceSettings);
-        
         // Create initial bubble
-        this.createBubble();        // Set interval for creating new bubbles based on device
-        const intervalMin = 800; // Much faster for more bubbles
+        this.createBubble();
+        
+        // Set interval for creating new bubbles
+        const intervalMin = 800;
         const intervalMax = 2000;
         
         this.bubbleInterval = setInterval(() => {
@@ -43,16 +45,13 @@ class PhotoBubbles {
             }
         }, intervalMin + Math.random() * (intervalMax - intervalMin));
         
-        console.log('Photo bubbles animation started with', this.maxBubbles, 'max bubbles');
-    }    createBubble() {
-        // Get random image
-        const imageSrc = this.getRandomImage();
-        if (!imageSrc) {
-            console.error('PhotoBubbles: No image source available');
-            return;
-        }
-        
-        console.log('PhotoBubbles: Creating bubble with image:', imageSrc);        // Create bubble element
+        console.log('Gradient bubbles animation started with', this.maxBubbles, 'max bubbles');
+    }
+
+    createBubble() {
+        console.log('PhotoBubbles: Creating gradient bubble');
+
+        // Create bubble element
         const bubble = document.createElement('div');
         bubble.className = 'photo-bubble';
         
@@ -60,78 +59,75 @@ class PhotoBubbles {
         const sizeRange = this.sizes[Math.floor(Math.random() * this.sizes.length)];
         const size = sizeRange.min + Math.random() * (sizeRange.max - sizeRange.min);
         
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        
         // Random horizontal position (keeping bubbles within viewport)
         const maxLeft = window.innerWidth - size;
-        bubble.style.left = `${Math.random() * maxLeft}px`;          // Start from bottom of screen for animation
-        bubble.style.top = `${window.innerHeight + size}px`;
+        const startX = Math.random() * maxLeft;
         
-        // Force high visibility for testing
-        bubble.style.position = 'fixed';
-        bubble.style.zIndex = '9999';
-        bubble.style.opacity = '1';
-        bubble.style.border = '3px solid #ff0000';  // Red border for visibility
+        // Generate bubble properties
+        const properties = this.generateBubbleProperties(size);
         
-        // Create inner image container for better control
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'bubble-image-container';
-        imageContainer.style.cssText = `
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-        `;
-          // Create image element
-        const img = document.createElement('img');
-        img.style.cssText = `
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        `;
-        img.src = imageSrc;
-        
-        // Handle image load errors - use colored background as fallback
-        img.onerror = () => {
-            console.warn(`Failed to load bubble image: ${imageSrc}, using color fallback`);
-            imageContainer.style.background = `linear-gradient(45deg, #667eea, #764ba2)`;
-            img.style.display = 'none';
-        };
-        
-        // Debug mode logging
-        if (this.debugMode) {
-            this.usedImages.add(imageSrc);
-            console.log(`Bubble created with image: ${imageSrc}`);
-            img.onload = () => {
-                console.log(`Successfully loaded: ${imageSrc}`);
-            };
-        }
-        
-        // Assemble bubble
-        imageContainer.appendChild(img);
-        bubble.appendChild(imageContainer);
-          // Add random transparency variation while maintaining bubble effect
-        const opacity = 0.8 + Math.random() * 0.2; // Range: 0.8 to 1.0 (more visible)
-        bubble.style.setProperty('--bubble-opacity', opacity);
-        
-        // Make bubbles more visible for testing
-        bubble.style.border = '3px solid rgba(255, 255, 255, 0.5)';
-        bubble.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-        
-        // Add random rotation for visual variety
-        const rotation = Math.random() * 360;
-        bubble.style.setProperty('--bubble-rotation', `${rotation}deg`);
+        // Apply styles for gradient bubble
+        Object.assign(bubble.style, {
+            width: `${size}px`,
+            height: `${size}px`,
+            left: `${startX}px`,
+            bottom: '-200px', // Start below viewport
+            position: 'fixed',
+            zIndex: properties.zIndex,
+            borderRadius: '50%',
+            opacity: properties.opacity,
+            transform: `rotate(${properties.rotation}deg)`,
+            background: `
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 50%),
+                linear-gradient(135deg, 
+                    rgba(255, 107, 157, 0.4) 0%, 
+                    rgba(196, 69, 105, 0.3) 50%, 
+                    rgba(108, 92, 231, 0.4) 100%)
+            `,
+            border: '2px solid rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 4px 20px rgba(255, 107, 157, 0.2)',
+            animation: `bubbleFloat ${properties.duration}s linear`,
+            '--bubble-opacity': properties.opacity,
+            '--bubble-rotation': `${properties.rotation}deg`
+        });
         
         // Add to DOM
         document.body.appendChild(bubble);
         this.bubbles.push(bubble);
-          // Remove bubble after animation completes
+        
+        // Auto-remove bubble after animation
         setTimeout(() => {
             this.removeBubble(bubble);
-        }, 20000); // Much longer duration for testing (20 seconds)
+        }, properties.duration * 1000);
+        
+        // Debug info
+        if (this.debugMode) {
+            console.log('PhotoBubbles: Created gradient bubble:', {
+                size: `${size}px`,
+                duration: `${properties.duration}s`,
+                startX: startX,
+                zIndex: properties.zIndex,
+                opacity: properties.opacity,
+                rotation: properties.rotation,
+                activeBubbles: this.bubbles.length
+            });
+        }
+    }
+
+    generateBubbleProperties(size) {
+        // Generate random properties for each bubble
+        const duration = 12 + Math.random() * 8; // 12-20 seconds
+        const opacity = 0.6 + Math.random() * 0.3; // 0.6-0.9
+        const rotation = Math.random() * 360; // 0-360 degrees
+        const zIndex = Math.floor(Math.random() * 10) + 5; // 5-14
+        
+        return {
+            duration,
+            opacity,
+            rotation,
+            zIndex
+        };
     }
 
     removeBubble(bubble) {
@@ -144,34 +140,29 @@ class PhotoBubbles {
         if (index > -1) {
             this.bubbles.splice(index, 1);
         }
-    }    getRandomImage() {
-        // Try to get image from imageConfig if available
-        if (window.imageConfig && window.imageConfig.floating) {
-            const floatingImages = window.imageConfig.floating;
-            console.log('PhotoBubbles: Using imageConfig with', floatingImages.length, 'images');
-            return floatingImages[Math.floor(Math.random() * floatingImages.length)];
+    }
+
+    detectDevice() {
+        const isMobile = window.innerWidth <= 768;
+        const isLowEnd = navigator.hardwareConcurrency <= 2;
+        
+        if (isMobile || isLowEnd) {
+            return {
+                sizes: [
+                    { min: 30, max: 60 },   // Smaller bubbles for mobile
+                    { min: 60, max: 100 },
+                    { min: 100, max: 140 }
+                ],
+                maxBubbles: 4,
+                interval: 2000
+            };
         }
         
-        console.log('PhotoBubbles: imageConfig not available, using fallback images');
-        
-        // Enhanced fallback to images that exist on your site
-        const fallbackImages = [
-            'dropbox/tooch-press.jpg',
-            'dropbox/tooch5.jpg',
-            'dropbox/tooch7.jpg',
-            'dropbox/floating image2.jpg',
-            'dropbox/tooch-gallery-1.jpg',
-            'dropbox/tooch-gallery-2.jpg',
-            'dropbox/tooch-gallery-3.jpg',
-            'dropbox/tooch-gallery-4.jpg',
-            'dropbox/media2/media1.jpg',
-            'dropbox/media2/media2.jpg',
-            'dropbox/media2/media3.jpg',
-            'dropbox/Merch/Merch1.JPG',
-            'dropbox/tour-image.JPG'
-        ];
-        
-        return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+        return {
+            sizes: this.sizes,
+            maxBubbles: this.maxBubbles,
+            interval: 1200
+        };
     }
 
     stop() {
@@ -182,15 +173,15 @@ class PhotoBubbles {
             this.bubbleInterval = null;
         }
         
-        // Clean up existing bubbles
+        // Remove all existing bubbles
         this.bubbles.forEach(bubble => {
             if (bubble && bubble.parentNode) {
                 bubble.parentNode.removeChild(bubble);
             }
         });
-        this.bubbles = [];
         
-        console.log('Photo bubbles animation stopped');
+        this.bubbles = [];
+        console.log('PhotoBubbles: Animation stopped and all bubbles removed');
     }
 
     pause() {
@@ -199,231 +190,50 @@ class PhotoBubbles {
             clearInterval(this.bubbleInterval);
             this.bubbleInterval = null;
         }
+        console.log('PhotoBubbles: Animation paused');
     }
 
     resume() {
         if (!this.isActive) {
             this.isActive = true;
             this.start();
+            console.log('PhotoBubbles: Animation resumed');
         }
     }
 
-    // Adjust bubble frequency based on user interaction
-    adjustFrequency(multiplier = 1) {
-        if (this.bubbleInterval) {
-            clearInterval(this.bubbleInterval);
-        }
-        
-        const baseInterval = 3000;
-        const randomVariation = 2000;
-        const newInterval = (baseInterval / multiplier) + Math.random() * (randomVariation / multiplier);
-        
-        this.bubbleInterval = setInterval(() => {
-            if (this.isActive && this.bubbles.length < this.maxBubbles) {
-                this.createBubble();
-            }
-        }, newInterval);
+    setMaxBubbles(count) {
+        this.maxBubbles = Math.max(1, Math.min(20, count));
+        console.log('PhotoBubbles: Max bubbles set to', this.maxBubbles);
     }
 
-    // Increase bubble activity when music is playing
-    musicMode(isPlaying) {
-        if (isPlaying) {
-            this.maxBubbles = 8;
-            this.adjustFrequency(1.5); // More frequent bubbles
-        } else {
-            this.maxBubbles = 5;
-            this.adjustFrequency(1); // Normal frequency
-        }
-   }
-
-    // Detect device type and adjust settings
-    detectDevice() {
-        const isMobile = window.innerWidth <= 768;
-        const isLowEnd = navigator.hardwareConcurrency <= 2 || navigator.deviceMemory <= 2;
-        
-        if (isMobile || isLowEnd) {
-            this.maxBubbles = 4;
-            return { 
-                interval: { min: 4000, max: 6000 }, // Slower on mobile
-                sizes: [
-                    { min: 40, max: 60 },   // Smaller bubbles
-                    { min: 60, max: 90 },
-                    { min: 90, max: 120 }
-                ]
-            };
-        }
-        
+    // Performance monitoring
+    getPerformanceInfo() {
         return {
-            interval: { min: 2000, max: 5000 },
-            sizes: this.sizes
+            activeBubbles: this.bubbles.length,
+            maxBubbles: this.maxBubbles,
+            isActive: this.isActive,
+            intervalActive: !!this.bubbleInterval
         };
     }
-
-    // Debug mode to track which images are being used
-    enableDebugMode() {
-        this.debugMode = true;
-        this.usedImages = new Set();
-        console.log('Photo bubbles debug mode enabled');
-    }
-
-    // Log used images (for debug mode)
-    logUsedImages() {
-        if (this.debugMode) {
-            console.log('Used bubble images:', Array.from(this.usedImages));
-        }
-    }
 }
 
-// Enhanced bubble effects
-class BubbleEffects {
-    static addGlowEffect(bubble) {
-        bubble.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.5)';
-        bubble.style.filter = 'brightness(1.1)';
-    }
-
-    static addParticleTrail(bubble) {
-        const trail = document.createElement('div');
-        trail.className = 'bubble-trail';
-        trail.style.position = 'absolute';
-        trail.style.width = '4px';
-        trail.style.height = '4px';
-        trail.style.background = 'rgba(255, 255, 255, 0.8)';
-        trail.style.borderRadius = '50%';
-        trail.style.pointerEvents = 'none';
-        trail.style.zIndex = '4';
-        
-        // Position trail behind bubble
-        const bubbleRect = bubble.getBoundingClientRect();
-        trail.style.left = `${bubbleRect.left + bubbleRect.width / 2}px`;
-        trail.style.top = `${bubbleRect.top + bubbleRect.height}px`;
-        
-        document.body.appendChild(trail);
-        
-        // Animate trail
-        setTimeout(() => {
-            if (trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-        }, 1000);
-    }
-
-    static addClickInteraction(bubble) {
-        bubble.style.cursor = 'pointer';
-        bubble.addEventListener('click', function() {
-            // Create burst effect
-            BubbleEffects.createBurstEffect(this);
-            
-            // Remove bubble immediately
-            if (this.parentNode) {
-                this.style.animation = 'bubblePop 0.3s ease-out forwards';
-                setTimeout(() => {
-                    if (this.parentNode) {
-                        this.parentNode.removeChild(this);
-                    }
-                }, 300);
+// Auto-initialize if not manually controlled
+if (typeof window !== 'undefined') {
+    // Initialize PhotoBubbles when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.photoBubbles) {
+                window.photoBubbles = new PhotoBubbles();
             }
         });
-    }
-
-    static createBurstEffect(element) {
-        const rect = element.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // Create multiple small particles
-        for (let i = 0; i < 8; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'bubble-particle';
-            particle.style.position = 'fixed';
-            particle.style.width = '6px';
-            particle.style.height = '6px';
-            particle.style.background = 'rgba(255, 255, 255, 0.9)';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '10';
-            particle.style.left = `${centerX}px`;
-            particle.style.top = `${centerY}px`;
-            
-            document.body.appendChild(particle);
-            
-            // Animate particle outward
-            const angle = (i / 8) * Math.PI * 2;
-            const distance = 50 + Math.random() * 30;
-            const targetX = centerX + Math.cos(angle) * distance;
-            const targetY = centerY + Math.sin(angle) * distance;
-            
-            particle.animate([
-                { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-                { transform: `translate(${targetX - centerX}px, ${targetY - centerY}px) scale(0)`, opacity: 0 }
-            ], {
-                duration: 600,
-                easing: 'ease-out'
-            }).onfinish = () => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            };
+    } else {
+        if (!window.photoBubbles) {
+            window.photoBubbles = new PhotoBubbles();
         }
     }
 }
 
-// Add CSS for bubble pop animation
-const bubbleStyles = document.createElement('style');
-bubbleStyles.textContent = `
-    @keyframes bubblePop {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.2); opacity: 0.8; }
-        100% { transform: scale(0); opacity: 0; }
-    }
-    
-    .photo-bubble:hover {
-        transform: scale(1.05);
-        filter: brightness(1.1);
-        transition: all 0.3s ease;
-    }
-`;
-document.head.appendChild(bubbleStyles);
-
-// Initialize photo bubbles
-let photoBubbles;
-
-function initializePhotoBubbles() {
-    photoBubbles = new PhotoBubbles();
-    
-    // Listen for music events to adjust bubble behavior
-    if (window.musicConfig) {
-        // Override the play/pause functions to adjust bubbles
-        const originalTogglePlayPause = window.togglePlayPause;
-        if (originalTogglePlayPause) {
-            window.togglePlayPause = function() {
-                originalTogglePlayPause();
-                if (photoBubbles) {
-                    photoBubbles.musicMode(window.musicConfig.isPlaying);
-                }
-            };
-        }
-    }
-    
-    // Pause bubbles when page is not visible
-    document.addEventListener('visibilitychange', () => {
-        if (photoBubbles) {
-            if (document.hidden) {
-                photoBubbles.pause();
-            } else {
-                photoBubbles.resume();
-            }
-        }
-    });
+// Export for module systems
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = PhotoBubbles;
 }
-
-// Auto-initialize
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePhotoBubbles);
-} else {
-    initializePhotoBubbles();
-}
-
-// Export for global access
-window.PhotoBubbles = PhotoBubbles;
-window.BubbleEffects = BubbleEffects;
-window.photoBubbles = photoBubbles;
