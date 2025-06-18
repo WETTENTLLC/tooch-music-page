@@ -907,21 +907,20 @@
     <!-- Custom music player script to match press-kit functionality -->
     <script>        // Simple music player functionality for main site
         class MainSiteMusicPlayer {
-            constructor() {
-                this.tracks = [
+            constructor() {                this.tracks = [
                     { 
                         title: "PRESS", 
                         artist: "Tooch Magooch", 
                         duration: "3:30",
                         src: "dropbox/PRESS MASTER .mp3",
-                        startTime: 21 // Skip intro
+                        startTime: 21 // Start "PRESS" at 0:21
                     },
                     { 
                         title: "Munyunn", 
-                        artist: "Tooch Magooch ft Mozzy", 
+                        artist: "Tooch Magooch", 
                         duration: "3:45",
                         src: "dropbox/Munyunn Ft Mozzy M3.m4a",
-                        startTime: 5
+                        startTime: 18 // Start "Munyunn" at 0:18
                     }
                 ];
                 this.currentTrack = 0; // Start with PRESS

@@ -360,9 +360,12 @@ class ToochMusicApp {
                 // Resize handling code here
             }, 150);
         });
-    }
-
-    initializeExternalComponents() {
+    }    initializeExternalComponents() {
+        // Initialize music system
+        if (typeof initializeMusicSystem === 'function') {
+            initializeMusicSystem();
+        }
+        
         // Initialize music player
         if (typeof MusicPlayer !== 'undefined') {
             this.components.musicPlayer = new MusicPlayer();
