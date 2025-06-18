@@ -375,14 +375,31 @@
                 <span class="floating-sparkle">✨</span>
                 <span class="floating-sparkle">⭐</span>
             </div>            <div class="hidden md:flex space-x-6">
-                <a href="#music" class="hover:text-purple-200 transition">Music</a>
-                <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
                 <a href="#media" class="hover:text-purple-200 transition">Media</a>
+                <a href="#videos" class="hover:text-purple-200 transition">Videos</a>
+                <a href="#music" class="hover:text-purple-200 transition">Music</a>
                 <a href="#merch" class="hover:text-purple-200 transition">Merch</a>
-                <a href="#tour" class="hover:text-purple-200 transition">Tour</a>                <a href="#about" class="hover:text-purple-200 transition">About</a>
+                <a href="#tour" class="hover:text-purple-200 transition">Tour</a>
+                <a href="#about" class="hover:text-purple-200 transition">About</a>
                 <a href="press-kit.html" class="hover:text-purple-200 transition">Press Kit</a>
                 <a href="#contact" class="hover:text-purple-200 transition">Contact</a>
-            </div>            <div class="flex space-x-4">
+            </div>            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu">
+                <button class="close-menu" id="close-mobile-menu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="#media">📸 Media</a>
+                <a href="#videos">🎬 Videos</a>
+                <a href="#music">🎵 Music</a>
+                <a href="#merch">🛍️ Merch</a>
+                <a href="#tour">🎤 Tour</a>
+                <a href="#about">ℹ️ About</a>
+                <a href="press-kit.html">📰 Press Kit</a>
+                <a href="#contact">📧 Contact</a>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+            <div class="flex space-x-4">
                 <a href="https://instagram.com/tooch_magooch" target="_blank" class="hover:text-purple-200"><i class="fab fa-instagram"></i></a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden text-white hover:text-pink-300 transition-colors duration-300">
@@ -515,12 +532,58 @@
                 </div>
             </div>
         </div>
+    </section>    <!-- Media Section -->
+    <section id="media" class="section py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mb-16 text-white">Media Gallery 📸</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/4Q1A3972 copy.JPEG" alt="Tooch Gallery Image 1" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/4Q1A3985 copy.JPEG" alt="Tooch Gallery Image 2" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/4Q1A4013 copy.JPEG" alt="Tooch Gallery Image 3" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/4Q1A4993.JPEG" alt="Tooch Gallery Image 4" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/4Q1A7649 copy.JPEG" alt="Tooch Gallery Image 5" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/aJsGF86X.JPG" alt="Tooch Gallery Image 6" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2">
+                    <img src="dropbox/Picture Gallery/REJv5HKQ.JPG" alt="Tooch Gallery Image 7" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2 hidden-gallery-image">
+                    <img src="dropbox/media2/media1.jpg" alt="Additional Gallery Image 1" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2 hidden-gallery-image">
+                    <img src="dropbox/media2/media2.jpg" alt="Additional Gallery Image 2" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2 hidden-gallery-image">
+                    <img src="dropbox/media2/media3.jpg" alt="Additional Gallery Image 3" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2 hidden-gallery-image">
+                    <img src="dropbox/media2/media4.jpg" alt="Additional Gallery Image 4" class="clickable-gallery-img">
+                </div>
+                <div class="gallery-item artist-card p-2 hidden-gallery-image">
+                    <img src="dropbox/media2/media5.jpg" alt="Additional Gallery Image 5" class="clickable-gallery-img">
+                </div>
+            </div>
+            
+            <button class="see-more-gallery-btn" id="seeMoreGalleryBtnMain">See More ----></button>
+        </div>
     </section>
 
     <!-- Videos Section -->
     <section id="videos" class="section py-24">
         <div class="container mx-auto px-4">
-            <h2 class="section-title text-center mb-16">Videos & Photos 🎬📸</h2>
+            <h2 class="section-title text-center mb-16">Performance Videos 🎬</h2>
             
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="w-full md:w-2/3">
@@ -626,56 +689,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>            </div>
         </div>
-    </section>    <!-- Media Section -->
-    <section id="media" class="section py-24">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-center mb-16 text-white">Media Gallery 📸</h2>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_1.jpg" alt="Tooch Gallery Image 1" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_2.jpg" alt="Tooch Gallery Image 2" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_3.jpg" alt="Tooch Gallery Image 3" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_4.jpg" alt="Tooch Gallery Image 4" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_5.jpg" alt="Tooch Gallery Image 5" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_6.jpg" alt="Tooch Gallery Image 6" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_7.jpg" alt="Tooch Gallery Image 7" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2 hidden-gallery-image">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_8.jpg" alt="Tooch Gallery Image 8" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2 hidden-gallery-image">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_9.jpg" alt="Tooch Gallery Image 9" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2 hidden-gallery-image">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_10.jpg" alt="Tooch Gallery Image 10" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2 hidden-gallery-image">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_11.jpg" alt="Tooch Gallery Image 11" class="clickable-gallery-img">
-                </div>
-                <div class="gallery-item artist-card p-2 hidden-gallery-image">
-                    <img src="dropbox/Picture Gallery/Tooch_Gallery_New_12.jpg" alt="Tooch Gallery Image 12" class="clickable-gallery-img">
-                </div>
-            </div>
-            
-            <button class="see-more-gallery-btn" id="seeMoreGalleryBtnMain">See More ----></button>
-        </div>
-    </section>    <!-- Merchandise Section -->
+    </section>
+
+    <!-- Merchandise Section -->
     <section id="merch" class="section py-24">
         <div class="container mx-auto px-4">
             <h2 class="section-title text-center mb-16 text-white">Merchandise 👕</h2>
@@ -887,8 +905,7 @@
     <script src="js/main.js"></script>
     
     <!-- Custom music player script to match press-kit functionality -->
-    <script>
-        // Simple music player functionality for main site
+    <script>        // Simple music player functionality for main site
         class MainSiteMusicPlayer {
             constructor() {
                 this.tracks = [
@@ -896,12 +913,15 @@
                         title: "PRESS", 
                         artist: "Tooch Magooch", 
                         duration: "3:30",
-                        src: "dropbox/PRESS MASTER .mp3"
-                    },                    { 
+                        src: "dropbox/PRESS MASTER .mp3",
+                        startTime: 21 // Skip intro
+                    },
+                    { 
                         title: "Munyunn", 
-                        artist: "Tooch Magooch", 
+                        artist: "Tooch Magooch ft Mozzy", 
                         duration: "3:45",
-                        src: "dropbox/first performance video.mp3"
+                        src: "dropbox/Munyunn Ft Mozzy M3.m4a",
+                        startTime: 5
                     }
                 ];
                 this.currentTrack = 0; // Start with PRESS
@@ -985,10 +1005,11 @@
                     this.audio.pause();
                     this.isPlaying = false;
                 } else {
-                    // Set the current time to 21 seconds if it's the PRESS track (first track)
-                    if (this.currentTrack === 0 && this.currentTime === 0) {
-                        this.audio.currentTime = 21;
-                        this.currentTime = 21;
+                    // Set the current time to start time if specified
+                    const track = this.tracks[this.currentTrack];
+                    if (track.startTime && this.currentTime === 0) {
+                        this.audio.currentTime = track.startTime;
+                        this.currentTime = track.startTime;
                     }
                     
                     this.audio.play().catch(error => {
@@ -1007,14 +1028,16 @@
                 this.audio.src = this.tracks[this.currentTrack].src;
                 this.audio.currentTime = 0;
                 this.currentTime = 0;
-                  // If it's the PRESS track (index 0), set start time to 21 seconds
-                if (index === 0) {
-                    this.audio.currentTime = 21;
-                    this.currentTime = 21;
+                
+                // Set start time if specified
+                const track = this.tracks[index];
+                if (track.startTime) {
+                    this.audio.currentTime = track.startTime;
+                    this.currentTime = track.startTime;
                 }
                 
                 this.updateTrackInfo();
-                this.updateProgressBar(index === 0 ? (21 / this.audio.duration * 100) : 0);
+                this.updateProgressBar(track.startTime ? (track.startTime / this.audio.duration * 100) : 0);
                 
                 this.audio.play().catch(error => {
                     console.error('Play failed:', error);
@@ -1022,6 +1045,76 @@
                 this.isPlaying = true;
                 this.updatePlayButton();
             }
+
+            playNext() {
+                this.currentTrack = (this.currentTrack + 1) % this.tracks.length;
+                this.playTrack(this.currentTrack);
+            }
+
+            playPrevious() {
+                this.currentTrack = this.currentTrack === 0 ? this.tracks.length - 1 : this.currentTrack - 1;
+                this.playTrack(this.currentTrack);
+            }
+
+            updateTrackInfo() {
+                const trackTitle = document.querySelector('.track-title');
+                const trackArtist = document.querySelector('.track-artist');
+                
+                if (trackTitle && trackArtist) {
+                    trackTitle.textContent = this.tracks[this.currentTrack].title;
+                    trackArtist.textContent = this.tracks[this.currentTrack].artist;
+                }
+            }
+
+            updatePlayButton() {
+                const playButton = document.querySelector('.play-button i');
+                if (playButton) {
+                    playButton.className = this.isPlaying ? 'fas fa-pause' : 'fas fa-play';
+                }
+            }
+
+            updateProgressBar(progress) {
+                const progressBar = document.querySelector('.progress-bar');
+                if (progressBar) {
+                    progressBar.style.setProperty('--progress-width', `${progress}%`);
+                }
+            }
+
+            updateCurrentTime() {
+                const currentTimeElement = document.querySelector('.current-time');
+                if (currentTimeElement) {
+                    currentTimeElement.textContent = this.formatTime(this.currentTime);
+                }
+            }
+
+            updateDuration() {
+                const totalTimeElement = document.querySelector('.total-time');
+                if (totalTimeElement) {
+                    totalTimeElement.textContent = this.formatTime(this.audio.duration);
+                }
+            }
+
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+                return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+
+            seek(e) {
+                if (!this.audio) return;
+                
+                const progressBar = e.currentTarget;
+                const rect = progressBar.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                const newTime = percent * this.audio.duration;
+                
+                this.audio.currentTime = newTime;
+                this.currentTime = newTime;
+            }
+        }
+
+        // Initialize the music player
+        const musicPlayer = new MainSiteMusicPlayer();
 
             playNext() {
                 this.currentTrack = (this.currentTrack + 1) % this.tracks.length;

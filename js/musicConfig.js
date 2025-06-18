@@ -8,15 +8,18 @@ const musicConfig = {    // Featured tracks data
             album: "Latest Single",
             duration: "3:30",
             file: "dropbox/PRESS MASTER .mp3",
-            cover: "dropbox/tooch-press.jpg"
-        },        {
+            cover: "dropbox/tooch-press.jpg",
+            startTime: 21 // Start "PRESS" at 0:21
+        },
+        {
             id: 2,
             title: "Munyunn",
             artist: "Tooch Magooch",
             album: "Single",
             duration: "3:45",
-            file: "dropbox/first performance video.mp3",
-            cover: "dropbox/tooch-gallery-1.jpg"
+            file: "dropbox/Munyunn Ft Mozzy M3.m4a",
+            cover: "dropbox/tooch-gallery-1.jpg",
+            startTime: 18 // Start "Munyunn" at 0:18
         }
     ],
     
@@ -65,6 +68,14 @@ function loadTrack(trackIndex) {
     // Load audio (with fallback for demo)
     musicConfig.audio.src = track.file;
     musicConfig.audio.load();
+    
+    // Set start time when metadata is loaded
+    if (track.startTime) {
+        musicConfig.audio.addEventListener('loadedmetadata', function setStartTime() {
+            musicConfig.audio.currentTime = track.startTime;
+            musicConfig.audio.removeEventListener('loadedmetadata', setStartTime);
+        });
+    }
     
     // Update playlist highlighting
     updatePlaylistHighlight();
@@ -134,17 +145,20 @@ function togglePlayPause() {
 
 // Play current track
 function playTrack() {
-    // For demo purposes, we'll simulate playing without actual audio
-    // In production, uncomment the line below:
-    // musicConfig.audio.play().catch(handleAudioError);
+    const track = musicConfig.tracks[musicConfig.currentTrack];
+    
+    // Set start time if specified
+    if (track.startTime && musicConfig.audio.readyState >= 1) {
+        musicConfig.audio.currentTime = track.startTime;
+    }
+    
+    // Play the actual audio
+    musicConfig.audio.play().catch(handleAudioError);
     
     musicConfig.isPlaying = true;
     updatePlayButton();
     
-    // Simulate playback for demo
-    simulatePlayback();
-    
-    console.log('Playing:', musicConfig.tracks[musicConfig.currentTrack].title);
+    console.log('Playing:', track.title);
 }
 
 // Pause current track
@@ -202,39 +216,7 @@ function updatePlaylistHighlight() {
 
 // Handle audio errors
 function handleAudioError(error) {
-    console.warn('Audio error:', error);
-    // For demo, we'll continue without actual audio playback
-}
-
-// Simulate playback for demo purposes
-function simulatePlayback() {
-    if (!musicConfig.isPlaying) return;
-    
-    const track = musicConfig.tracks[musicConfig.currentTrack];
-    const duration = parseFloat(track.duration.split(':')[0]) * 60 + parseFloat(track.duration.split(':')[1]);
-    
-    let currentTime = 0;
-    const interval = setInterval(() => {
-        if (!musicConfig.isPlaying) {
-            clearInterval(interval);
-            return;
-        }
-        
-        currentTime += 1;
-        
-        // Update progress
-        const progress = (currentTime / duration) * 100;
-        const currentTimeElements = document.querySelectorAll('.current-time');
-        currentTimeElements.forEach(el => el.textContent = formatTime(currentTime));
-        
-        // Update CSS custom property for progress bar
-        document.documentElement.style.setProperty('--progress-width', `${progress}%`);
-        
-        if (currentTime >= duration) {
-            clearInterval(interval);
-            playNext();
-        }
-    }, 1000);
+    console.warn('Audio error:', error);    // Audio error handled
 }
 
 // Get track by ID

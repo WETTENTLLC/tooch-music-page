@@ -23,8 +23,7 @@ class ToochMusicApp {
         if (this.isInitialized) return;
 
         console.log('Initializing Tooch Magooch Music App...');
-        
-        // Initialize core components
+          // Initialize core components
         this.setupNavigation();
         this.setupScrollEffects();
         this.setupFormHandlers();
@@ -33,6 +32,8 @@ class ToochMusicApp {
         this.setupIntersectionObserver();
         this.setupErrorHandling();
         this.setupPerformanceOptimizations();
+        this.setupVideoPlayer();
+        this.setupGalleryFunctionality();
         
         // Initialize external components
         this.initializeExternalComponents();
@@ -175,52 +176,84 @@ class ToochMusicApp {
                 this.showNotification('Successfully subscribed! You\'ll be notified of updates.', 'success');
                 console.log('Newsletter signup:', email);
             }, 1000);
-        });
-    }    setupMobileMenu() {
+        });    }
+
+    setupMobileMenu() {
         const menuButton = document.getElementById('mobile-menu-btn');
-        const mobileNav = document.createElement('div');
-        const overlay = document.createElement('div');
+        if (!menuButton) {
+            console.warn('Mobile menu button not found');
+            return;
+        }
+
+        let mobileNav = document.querySelector('.mobile-menu');
+        let overlay = document.querySelector('.mobile-menu-overlay');
         
-        mobileNav.className = 'mobile-menu';
-        overlay.className = 'mobile-menu-overlay';
+        // Create elements if they don't exist
+        if (!mobileNav) {
+            mobileNav = document.createElement('div');
+            mobileNav.className = 'mobile-menu';
+            
+            mobileNav.innerHTML = `
+                <button class="close-menu">✕</button>
+                <a href="#music">🎵 Music</a>
+                <a href="#media">📸 Media</a>
+                <a href="#videos">🎬 Videos</a>
+                <a href="#merch">🛍️ Merch</a>
+                <a href="#tour">🎤 Tour</a>
+                <a href="#about">ℹ️ About</a>
+                <a href="press-kit.html">📰 Press Kit</a>
+                <a href="#contact">📧 Contact</a>
+            `;
+            
+            document.body.appendChild(mobileNav);
+        }
         
-        mobileNav.innerHTML = `
-            <a href="#music">🎵 Music</a>
-            <a href="#videos">🎬 Videos</a>
-            <a href="#media">📸 Media</a>
-            <a href="#merch">🛍️ Merch</a>
-            <a href="#tour">🎤 Tour</a>
-            <a href="#about">ℹ️ About</a>
-            <a href="press-kit.html">📰 Press Kit</a>
-            <a href="#contact">📧 Contact</a>
-            <button class="close-menu">✕ Close</button>
-        `;
-        
-        document.body.appendChild(overlay);
-        document.body.appendChild(mobileNav);
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'mobile-menu-overlay';
+            document.body.appendChild(overlay);
+        }
 
         // Mobile menu functionality
         const toggleMenu = () => {
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+            const isActive = mobileNav.classList.contains('active');
+            
+            if (isActive) {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else {
+                mobileNav.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         };
         
-        if (menuButton) {
-            menuButton.addEventListener('click', toggleMenu);
-        }
+        // Menu button click
+        menuButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
         
         // Close menu when clicking overlay
-        overlay.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMenu();
+        });
         
         // Close menu when clicking close button
         const closeButton = mobileNav.querySelector('.close-menu');
         if (closeButton) {
-            closeButton.addEventListener('click', toggleMenu);
+            closeButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
         }
-        
-        // Close menu when clicking nav links
-        mobileNav.querySelectorAll('a').forEach(link => {
+          // Close menu when clicking nav links
+        const navLinks = mobileNav.querySelectorAll('a');
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 toggleMenu();
                 // Smooth scroll to section
@@ -409,6 +442,79 @@ class ToochMusicApp {
             document.body.style.overflow = 'auto';
         }
     }
+
+    setupVideoPlayer() {
+        // Handle video thumbnail clicks
+        const videoItems = document.querySelectorAll('.video-item');
+        const mainVideoFrame = document.querySelector('#videos iframe');
+        
+        videoItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const videoSrc = item.getAttribute('data-video');
+                const videoTitle = item.getAttribute('data-title');
+                
+                // Note: MOV files won't work directly in browsers
+                // This is a placeholder for when videos are converted to web-compatible formats
+                console.log('Video selected:', videoTitle, videoSrc);
+                
+                // For now, show an alert since MOV files don't work in browsers
+                alert(`${videoTitle} - Video files need to be converted to web-compatible format (MP4) for playback.`);
+            });
+        });
+    }
+
+    setupGalleryFunctionality() {
+        // Handle "See More" button for gallery
+        const seeMoreBtn = document.getElementById('seeMoreGalleryBtnMain');
+        const hiddenImages = document.querySelectorAll('.hidden-gallery-image');
+        
+        if (seeMoreBtn) {
+            seeMoreBtn.addEventListener('click', () => {
+                hiddenImages.forEach(img => {
+                    img.style.display = 'block';
+                });
+                seeMoreBtn.style.display = 'none';
+            });
+        }
+
+        // Handle gallery image clicks for lightbox
+        const galleryImages = document.querySelectorAll('.clickable-gallery-img');
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                this.openImageLightbox(img.src, img.alt);
+            });
+        });
+    }
+
+    openImageLightbox(imageSrc, imageAlt) {
+        // Create lightbox overlay
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <button class="lightbox-close">&times;</button>
+                <img src="${imageSrc}" alt="${imageAlt}" class="lightbox-image">
+                <p class="lightbox-caption">${imageAlt}</p>
+            </div>
+        `;
+        
+        document.body.appendChild(lightbox);
+        document.body.style.overflow = 'hidden';
+        
+        // Close lightbox functionality
+        const closeBtn = lightbox.querySelector('.lightbox-close');
+        const closeLightbox = () => {
+            document.body.removeChild(lightbox);
+            document.body.style.overflow = 'auto';
+        };
+        
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
 }
 
 // Add CSS for animations and notifications
@@ -500,6 +606,57 @@ mainStyles.textContent = `
     
     .hidden-gallery-image {
         display: none !important;
+    }
+
+    .lightbox-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    .lightbox-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    .lightbox-caption {
+        color: #fff;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.9rem;
     }
 `;
 document.head.appendChild(mainStyles);
