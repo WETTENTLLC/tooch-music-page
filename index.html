@@ -422,8 +422,7 @@
             <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
             <div class="flex space-x-4">
                 <a href="https://instagram.com/tooch_magooch" target="_blank" class="hover:text-purple-200"><i class="fab fa-instagram"></i></a>
-            </div>
-            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-pink-300 transition-colors duration-300">
+            </div>            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-pink-300 transition-colors duration-300" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
@@ -1366,6 +1365,52 @@
                 if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
                     closeModal();
                 }
+            });        });
+    </script>
+
+    <!-- Simple Mobile Menu JavaScript -->
+    <script>
+        function toggleMobileMenu() {
+            console.log('Mobile menu button clicked!');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (mobileMenu && overlay) {
+                const isActive = mobileMenu.classList.contains('active');
+                
+                if (isActive) {
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    console.log('Menu closed');
+                } else {
+                    mobileMenu.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    console.log('Menu opened');
+                }
+            } else {
+                console.log('Mobile menu elements not found');
+            }
+        }
+
+        // Close menu when clicking overlay or close button
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const closeBtn = document.getElementById('close-mobile-menu');
+            const menuLinks = document.querySelectorAll('#mobile-menu a');
+            
+            if (overlay) {
+                overlay.addEventListener('click', toggleMobileMenu);
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', toggleMobileMenu);
+            }
+            
+            // Close menu when clicking nav links
+            menuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
             });
         });
     </script>
