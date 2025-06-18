@@ -181,39 +181,31 @@ class ToochMusicApp {
             }, 1000);
         });    }    setupMobileMenu() {
         const menuButton = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const closeButton = document.getElementById('close-mobile-menu');
+        
         if (!menuButton) {
             console.warn('Mobile menu button not found');
             return;
         }
-
-        let mobileNav = document.querySelector('.mobile-menu');
-        let overlay = document.querySelector('.mobile-menu-overlay');
         
-        // Create elements if they don't exist
         if (!mobileNav) {
-            mobileNav = document.createElement('div');
-            mobileNav.className = 'mobile-menu';
-            
-            mobileNav.innerHTML = `
-                <button class="close-menu">✕</button>
-                <a href="#music">🎵 Music</a>
-                <a href="#media">📸 Media</a>
-                <a href="#videos">🎬 Videos</a>
-                <a href="#merch">🛍️ Merch</a>
-                <a href="#tour">🎤 Tour</a>
-                <a href="#about">ℹ️ About</a>
-                <a href="press-kit.html">📰 Press Kit</a>
-                <a href="#contact">📧 Contact</a>
-            `;
-            
-            document.body.appendChild(mobileNav);
+            console.warn('Mobile menu not found');
+            return;
         }
         
         if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'mobile-menu-overlay';
-            document.body.appendChild(overlay);
+            console.warn('Mobile menu overlay not found');
+            return;
         }
+
+        // Debug: Log all elements found
+        console.log('Mobile menu elements found:');
+        console.log('Menu button:', menuButton);
+        console.log('Mobile nav:', mobileNav);
+        console.log('Overlay:', overlay);
+        console.log('Close button:', closeButton);
 
         // Mobile menu functionality
         const toggleMenu = () => {
@@ -248,7 +240,6 @@ class ToochMusicApp {
         });
         
         // Close menu when clicking close button
-        const closeButton = mobileNav.querySelector('.close-menu');
         if (closeButton) {
             closeButton.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -257,10 +248,12 @@ class ToochMusicApp {
                 toggleMenu();
             });
         }
-          // Close menu when clicking nav links
+        
+        // Close menu when clicking nav links
         const navLinks = mobileNav.querySelectorAll('a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
+                console.log('Nav link clicked');
                 toggleMenu();
                 // Smooth scroll to section
                 const targetId = link.getAttribute('href');
